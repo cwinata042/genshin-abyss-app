@@ -114,3 +114,75 @@ body {
   background-color: rgba(209, 160, 113, 0.4);
   grid-row: 6 / 13;
 }
+
+/* CHARACTER CARD */
+:root {
+  --five-star-gradient: linear-gradient(#805248, #bd813c);
+  --four-star-gradient: linear-gradient(#5f5581, #886ca5);
+  --cream: #fffbf0;
+  --character-card-width: 133px;
+  --character-card-height: 179px;
+  --character-img-height: 151px;
+}
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: var(--character-card-width);
+  height: var(--character-card-height);
+  border-radius: 5px;
+}
+
+.character-card-img {
+  position: relative;
+}
+
+.character-img {
+  position: relative;
+  width: auto;
+  height: var(--character-img-height);
+  object-fit: cover;
+  margin: none;
+}
+
+.triquetra {
+  position: absolute;
+  background-image: url(../public/icons/other/icon-triquetra.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
+  width: var(--character-card-width);
+  height: var(--character-img-height);
+  opacity: 0.03;
+}
+
+.five-star {
+  position: absolute;
+  background: var(--five-star-gradient);
+  width: var(--character-card-width);
+  height: var(--character-img-height);
+}
+
+.four-star {
+  position: absolute;
+  background: var(--four-star-gradient);
+  width: var(--character-card-width);
+  height: var(--character-img-height);
+}
+
+.character-name {
+  height: 100%;
+  width: 100%;
+  line-height: 28px;
+  align-self: center;
+
+  font-size: 0.92em;
+  color: black;
+  background: var(--cream);
+  padding: 0px 6px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
