@@ -1,4 +1,4 @@
-import CharacterCard from "./components/CharacterCard";
+import CharacterList from "./components/CharacterList";
 
 export default function App() {
   return (
@@ -7,10 +7,7 @@ export default function App() {
         <div className="header">HEADER</div>
         <div className="main">
           <div className="characters">
-            <div className="character-list">
-              CHARACTER LIST
-              <CharacterCard />
-            </div>
+            <CharacterList />
             <div className="character-filters">FILTERS</div>
           </div>
           <div className="team-builder">

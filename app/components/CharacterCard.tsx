@@ -1,18 +1,23 @@
 import React from "react";
 import { Character } from "./types";
 
-const CharacterCard = () => {
+const CharacterCard = (props: { characterInfo: Character }) => {
+  function getStyle() {
+    if (props.characterInfo.rarity) {
+      return props.characterInfo.rarity === 5 ? "five-star" : "four-star";
+    } else {
+      return "default";
+    }
+  }
+
   return (
     <button className="character-card">
       <div className="character-card-img">
-        <div className="five-star"></div>
+        <div className={getStyle()}></div>
         <div className="triquetra"></div>
-        <img
-          className="character-img"
-          src="https://genshin.honeyhunterworld.com/img/alhatham_078_icon.webp?x54247"
-        />
+        <img className="character-img" src={props.characterInfo.profile_img} />
       </div>
-      <div className="character-name">Alhaitham</div>
+      <div className="character-name">{props.characterInfo.name}</div>
     </button>
   );
 };
