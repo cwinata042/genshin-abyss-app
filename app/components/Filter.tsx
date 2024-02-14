@@ -1,9 +1,20 @@
+"use client";
+
 import React from "react";
 import { FilterType } from "./types";
 
 export default function Filter(props: { filterInfo: FilterType }) {
+  const [isSelected, setIsSelected] = React.useState(false);
+
+  function handleClick() {
+    setIsSelected((prevIsSelected) => !prevIsSelected);
+  }
+
   return (
-    <button className="filter">
+    <button
+      className={isSelected ? "filter selected" : "filter"}
+      onClick={handleClick}
+    >
       <img
         className="filter-icon"
         src={props.filterInfo.img}

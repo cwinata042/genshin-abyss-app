@@ -20,12 +20,12 @@ export default async function Filters() {
     {
       id: 0,
       name: "Male",
-      img: "https://www.svgrepo.com/show/521738/male.svg",
+      img: "/icons/other/male-icon.svg",
     },
     {
       id: 1,
       name: "Female",
-      img: "https://www.svgrepo.com/show/521659/female.svg",
+      img: "/icons/other/female-icon.svg",
     },
   ];
 
