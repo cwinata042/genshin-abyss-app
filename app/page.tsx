@@ -1,12 +1,15 @@
-export default function Home() {
+import CharacterList from "./components/CharacterList";
+import Filters from "./components/Filters";
+
+export default function App() {
   return (
     <main>
       <div className="wrapper">
         <div className="header">HEADER</div>
         <div className="main">
           <div className="characters">
-            <div className="character-list">CHARACTER LIST</div>
-            <div className="character-filters">FILTERS</div>
+            <CharacterList />
+            <Filters />
           </div>
           <div className="team-builder">
             <div className="options">OPTIONS</div>
