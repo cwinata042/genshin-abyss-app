@@ -4,9 +4,10 @@ export type Character = {
   gender: string;
   rarity: number;
   element: string;
-  weapon: string;
+  weapon_type: string;
   region: string;
   profile_img: string;
+  isVisible: boolean;
 };
 
 export type FilterType = {
