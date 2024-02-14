@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 24 24"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="female-icon.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.01625"
+     inkscape:cx="400"
+     inkscape:cy="400"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="293"
+     inkscape:window-y="1432"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     fill-rule="evenodd"
+     clip-rule="evenodd"
+     d="m 18.545457,9.5454536 c 0,3.3384274 -2.4993,6.0930814 -5.728827,6.4949724 0.0011,0.01669 0.0016,0.03355 0.0016,0.05048 v 1.636364 h 0.818182 c 0.451882,0 0.818182,0.3663 0.818182,0.818182 0,0.451881 -0.3663,0.818181 -0.818182,0.818181 H 12.81823 v 0.818182 c -4.6e-5,0.451884 -0.366346,0.818184 -0.818227,0.818184 -0.451882,0 -0.818182,-0.3663 -0.818182,-0.818182 v -0.818182 h -0.818182 c -0.4518657,0 -0.8181821,-0.3663 -0.8181821,-0.818181 0,-0.451882 0.3663164,-0.818182 0.8181821,-0.818182 h 0.818182 v -1.636364 c 0,-0.01694 4.91e-4,-0.03379 0.0015,-0.05048 -3.2295606,-0.401891 -5.7288279,-3.156545 -5.7288279,-6.4949724 0,-3.6149564 2.9304982,-6.5454546 6.5454549,-6.5454546 3.614972,0 6.545454,2.9304982 6.545454,6.5454546 z m -11.4515593,0 c 0,2.7095724 2.1965401,4.9060634 4.9061053,4.9060634 2.709572,0 4.906063,-2.196491 4.906063,-4.9060633 0,-2.7095646 -2.196491,-4.9061047 -4.906063,-4.9061047 -2.7095652,0 -4.9061052,2.1965401 -4.9061053,4.9061046 z"
+     fill="#0f0f0f"
+     id="path1"
+     style="stroke-width:0.818182;fill:#ffffff;fill-opacity:1" />
+</svg>

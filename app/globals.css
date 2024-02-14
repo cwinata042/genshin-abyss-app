@@ -128,12 +128,19 @@ body {
   gap: 1.688rem;
 }
 
-.filter-icon {
-  height: 2rem;
+.filter {
   border: var(--cream15);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
+}
+
+.filter.selected {
+  background-color: var(--cream15);
+}
+
+.filter-icon {
+  height: 2rem;
 }
 
 /** TEAM BUILDER **/
