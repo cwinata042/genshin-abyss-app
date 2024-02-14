@@ -4,7 +4,7 @@ export type Character = {
   gender: string;
   rarity: number;
   element: string;
-  weapon_type: string;
+  weapon: string;
   region: string;
   profile_img: string;
   isVisible: boolean;
