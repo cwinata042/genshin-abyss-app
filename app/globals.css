@@ -11,6 +11,12 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --five-star-gradient: linear-gradient(#805248, #bd813c);
+  --four-star-gradient: linear-gradient(#5f5581, #886ca5);
+  --cream: #fffbf0;
+  --character-card-width: 133px;
+  --character-card-height: 179px;
+  --character-img-height: 151px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,7 +54,6 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  grid-auto-columns: auto;
   height: 100vh;
   width: 100%;
 }
@@ -73,13 +78,38 @@ body {
   display: grid;
   grid-template-rows: repeat(12, 1fr);
   grid-column: 1 / 9;
+  max-height: 100vh;
+  min-height: 0;
 }
 
 .character-list {
-  background-color: rgba(7, 7, 214, 0.4);
-  display: flex;
-  width: auto;
+  padding: 10px 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 133px);
+
+  overflow: auto;
+
+  justify-content: center;
+  gap: 10px;
+
   grid-row: 1 / 12;
+}
+
+.character-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.character-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--cream);
+}
+
+.character-list::-webkit-scrollbar-thumb:hover {
+  background-color: #cecbc2;
+}
+.character-list::-webkit-scrollbar-track {
+  padding: 2px 0;
+  background-color: rgba(217, 217, 217, 0.2);
 }
 
 .character-filters {
@@ -114,15 +144,6 @@ body {
 }
 
 /* CHARACTER CARD */
-:root {
-  --five-star-gradient: linear-gradient(#805248, #bd813c);
-  --four-star-gradient: linear-gradient(#5f5581, #886ca5);
-  --cream: #fffbf0;
-  --character-card-width: 133px;
-  --character-card-height: 179px;
-  --character-img-height: 151px;
-}
-
 .character-card {
   display: flex;
   flex-direction: column;
@@ -141,7 +162,8 @@ body {
   width: auto;
   height: var(--character-img-height);
   object-fit: cover;
-  margin: none;
+  margin: auto;
+  display: block;
 }
 
 .triquetra {
