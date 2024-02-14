@@ -16,11 +16,28 @@ export default function Characters(props: {
       return { ...character, isVisible: true };
     })
   );
+  console.log(filteredChars);
 
   function filterChars(filterName: string, filterType: string) {
-    setFilteredChars((prevFilteredChar) => {
-      return prevFilteredChar;
+    setFilteredChars((prevFilteredChars) => {
+      const filteredChars = prevFilteredChars.filter((character) => {
+        switch (filterName) {
+          case "element":
+            return character.element === filterType;
+          case "weapon_type":
+            return character.weapon === filterType;
+          case "rarity":
+            return character.rarity === (filterType === "5 star" ? 5 : 4);
+          case "gender":
+            return character.gender === filterType;
+          default:
+            return false;
+        }
+      });
+      return filteredChars;
     });
+
+    console.log("filtering characters");
   }
 
   const characterCardList = filteredChars.map((character) => {

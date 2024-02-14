@@ -26,13 +26,26 @@ export default function Filters(props: {
 
   return (
     <div className="character-filters">
-      <FilterGroup filterName="element" filterGroupInfo={props.elementData} />
+      <FilterGroup
+        filterName="element"
+        filterGroupInfo={props.elementData}
+        setFilters={props.setFilters}
+      />
       <FilterGroup
         filterName="weapon_type"
         filterGroupInfo={props.weaponTypeData}
+        setFilters={props.setFilters}
       />
-      <FilterGroup filterName="rarity" filterGroupInfo={rarityData} />
-      <FilterGroup filterName="gender" filterGroupInfo={genderData} />
+      <FilterGroup
+        filterName="rarity"
+        filterGroupInfo={rarityData}
+        setFilters={props.setFilters}
+      />
+      <FilterGroup
+        filterName="gender"
+        filterGroupInfo={genderData}
+        setFilters={props.setFilters}
+      />
     </div>
   );
 }

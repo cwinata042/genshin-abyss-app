@@ -4,10 +4,12 @@ import { FilterType } from "./types";
 export default function Filter(props: {
   filterName: string;
   filterInfo: FilterType;
+  setFilters: Function;
 }) {
   const [isSelected, setIsSelected] = React.useState(false);
 
   function handleClick() {
+    props.setFilters(props.filterName, props.filterInfo.name);
     setIsSelected((prevIsSelected) => !prevIsSelected);
   }
 
