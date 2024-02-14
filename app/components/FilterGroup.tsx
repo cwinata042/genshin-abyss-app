@@ -3,9 +3,14 @@ import Filter from "./Filter";
 import { FilterType } from "./types";
 const { v4 } = require("uuid");
 
-export default function FilterGroup(props: { filterGroupInfo: FilterType[] }) {
+export default function FilterGroup(props: {
+  filterName: string;
+  filterGroupInfo: FilterType[];
+}) {
   const filterList = props.filterGroupInfo.map((filter) => {
-    return <Filter key={v4()} filterInfo={filter} />;
+    return (
+      <Filter key={v4()} filterName={props.filterName} filterInfo={filter} />
+    );
   });
 
   return <div className="character-filter-group">{filterList}</div>;

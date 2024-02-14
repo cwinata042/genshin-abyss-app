@@ -2,16 +2,11 @@ import React from "react";
 import FilterGroup from "./FilterGroup";
 import { FilterType } from "./types";
 
-export default async function Filters() {
-  const resElement = await fetch(
-    `https://knbr-genshin-api.vercel.app/api/elements`
-  );
-  const resWeapon = await fetch(
-    `https://knbr-genshin-api.vercel.app/api/weapon-types`
-  );
-
-  const elementData: FilterType[] = await resElement.json();
-  const weaponTypeData: FilterType[] = await resWeapon.json();
+export default function Filters(props: {
+  elementData: FilterType[];
+  weaponTypeData: FilterType[];
+  setFilters: Function;
+}) {
   const rarityData: FilterType[] = [
     { id: 0, name: "5 star", img: "/icons/other/five-star-icon.svg" },
     { id: 1, name: "4 star", img: "/icons/other/four-star-icon.svg" },
@@ -31,10 +26,13 @@ export default async function Filters() {
 
   return (
     <div className="character-filters">
-      <FilterGroup filterGroupInfo={elementData} />
-      <FilterGroup filterGroupInfo={weaponTypeData} />
-      <FilterGroup filterGroupInfo={rarityData} />
-      <FilterGroup filterGroupInfo={genderData} />
+      <FilterGroup filterName="element" filterGroupInfo={props.elementData} />
+      <FilterGroup
+        filterName="weapon_type"
+        filterGroupInfo={props.weaponTypeData}
+      />
+      <FilterGroup filterName="rarity" filterGroupInfo={rarityData} />
+      <FilterGroup filterName="gender" filterGroupInfo={genderData} />
     </div>
   );
 }
