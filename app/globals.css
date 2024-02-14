@@ -71,6 +71,7 @@ body {
   display: grid;
   grid-row: 2 / 13;
   grid-template-columns: repeat(12, 1fr);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /** CHARACTERS **/
@@ -80,6 +81,7 @@ body {
   grid-column: 1 / 9;
   max-height: 100vh;
   min-height: 0;
+  background-color: rgba(255, 251, 240, 0.1);
 }
 
 .character-list {
@@ -116,8 +118,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 195, 255, 0.4);
   grid-row: 12 / 13;
+}
+
+.filter-icon {
+  height: 2rem;
 }
 
 /** TEAM BUILDER **/

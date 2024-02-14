@@ -1,4 +1,5 @@
 import CharacterList from "./components/CharacterList";
+import Filters from "./components/Filters";
 
 export default function App() {
   return (
@@ -8,7 +9,7 @@ export default function App() {
         <div className="main">
           <div className="characters">
             <CharacterList />
-            <div className="character-filters">FILTERS</div>
+            <Filters />
           </div>
           <div className="team-builder">
             <div className="options">OPTIONS</div>

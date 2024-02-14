@@ -8,3 +8,9 @@ export type Character = {
   region: string;
   profile_img: string;
 };
+
+export type FilterType = {
+  id: number;
+  name: string;
+  img: string;
+};
