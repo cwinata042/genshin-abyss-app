@@ -89,6 +89,7 @@ body {
   padding: 10px 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, 133px);
+  grid-template-rows: repeat(auto-fit, 179px);
 
   overflow: auto;
 
