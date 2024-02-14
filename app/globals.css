@@ -78,10 +78,8 @@ body {
 .character-list {
   background-color: rgba(7, 7, 214, 0.4);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: auto;
   grid-row: 1 / 12;
-  align-content: center;
 }
 
 .character-filters {
