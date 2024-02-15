@@ -5,17 +5,30 @@ export default function Filter(props: {
   filterName: string;
   filterInfo: FilterType;
   setFilters: Function;
+  currFilters: string[][];
 }) {
-  const [isSelected, setIsSelected] = React.useState(false);
-
   function handleClick() {
     props.setFilters(props.filterName, props.filterInfo.name);
-    setIsSelected((prevIsSelected) => !prevIsSelected);
+  }
+
+  function getSelected() {
+    let index: number;
+    if (props.filterName === "element") {
+      index = 0;
+    } else if (props.filterName === "weapon_type") {
+      index = 1;
+    } else if (props.filterName === "rarity") {
+      index = 2;
+    } else {
+      index = 3;
+    }
+
+    return props.currFilters[index].includes(props.filterInfo.name);
   }
 
   return (
     <button
-      className={isSelected ? "filter selected" : "filter"}
+      className={getSelected() ? "filter selected" : "filter"}
       onClick={handleClick}
     >
       <img

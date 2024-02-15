@@ -7,6 +7,7 @@ export default function FilterGroup(props: {
   filterName: string;
   filterGroupInfo: FilterType[];
   setFilters: Function;
+  currFilters: string[][];
 }) {
   const filterList = props.filterGroupInfo.map((filter) => {
     return (
@@ -15,6 +16,7 @@ export default function FilterGroup(props: {
         filterName={props.filterName}
         filterInfo={filter}
         setFilters={props.setFilters}
+        currFilters={props.currFilters}
       />
     );
   });
