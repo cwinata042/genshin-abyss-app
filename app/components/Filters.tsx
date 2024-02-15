@@ -6,6 +6,7 @@ export default function Filters(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
   setFilters: Function;
+  clearFilters: Function;
   currFilters: string[][];
 }) {
   const rarityData: FilterType[] = [
@@ -51,6 +52,9 @@ export default function Filters(props: {
         setFilters={props.setFilters}
         currFilters={props.currFilters}
       />
+      <button className="filter-reset" onClick={() => props.clearFilters()}>
+        Reset Filters
+      </button>
     </div>
   );
 }
