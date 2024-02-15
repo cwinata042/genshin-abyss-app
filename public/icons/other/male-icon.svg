@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 24 24"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="male-icon.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.01625"
+     inkscape:cx="400"
+     inkscape:cy="400"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="293"
+     inkscape:window-y="1432"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     fill-rule="evenodd"
+     clip-rule="evenodd"
+     d="M 15,3.8571429 C 15,3.38376 15.383743,3 15.857143,3 h 3.428571 C 20.232514,3 21,3.7675114 21,4.7142857 V 8.1428571 C 21,8.6162486 20.616257,9 20.142857,9 19.669457,9 19.285714,8.61624 19.285714,8.1428571 V 5.9253257 l -3.885343,3.8853514 c -0.04286,0.042883 -0.08923,0.080237 -0.138,0.1122086 0.909686,1.1635713 1.451915,2.6284283 1.451915,4.2199713 C 16.714286,17.929971 13.644257,21 9.8571429,21 6.0700457,21 3,17.929971 3,14.142857 3,10.355743 6.0700457,7.2857143 9.8571429,7.2857143 c 1.5907711,0 3.0550281,0.5416886 4.2183431,1.45068 0.03197,-0.048917 0.06943,-0.095297 0.112371,-0.13824 l 3.8838,-3.8838686 H 15.857143 C 15.383743,4.7142857 15,4.3305257 15,3.8571429 Z M 9.8571429,19.282543 c -2.8385915,0 -5.1397286,-2.301086 -5.1397286,-5.139686 0,-2.8386 2.3011371,-5.1397284 5.1397286,-5.1397284 2.8386001,0 5.1396861,2.3011284 5.1396861,5.1397284 0,2.8386 -2.301086,5.139686 -5.1396861,5.139686 z"
+     fill="#0f0f0f"
+     id="path1"
+     style="stroke-width:0.857143;fill:#ffffff;fill-opacity:1" />
+</svg>
