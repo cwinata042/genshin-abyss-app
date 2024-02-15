@@ -42,7 +42,9 @@ export default function Characters(props: {
   }
 
   function clearFilters() {
-    setCurrFilters(emptyFilters);
+    if (currFilters.flat().length > 0) {
+      setCurrFilters(emptyFilters);
+    }
   }
 
   return (
