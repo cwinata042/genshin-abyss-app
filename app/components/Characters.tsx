@@ -41,13 +41,21 @@ export default function Characters(props: {
     setCurrFilters(newFilters);
   }
 
+  function clearFilters() {
+    setCurrFilters(emptyFilters);
+  }
+
   return (
     <div className="characters">
-      <CharacterList ownedCharacters={props.ownedCharacters} />
+      <CharacterList
+        ownedCharacters={props.ownedCharacters}
+        currFilters={currFilters}
+      />
       <Filters
         elementData={props.elementData}
         weaponTypeData={props.weaponTypeData}
         setFilters={setFilters}
+        clearFilters={clearFilters}
         currFilters={currFilters}
       />
     </div>

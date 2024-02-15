@@ -6,6 +6,7 @@ export default function Filters(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
   setFilters: Function;
+  clearFilters: Function;
   currFilters: string[][];
 }) {
   const rarityData: FilterType[] = [
