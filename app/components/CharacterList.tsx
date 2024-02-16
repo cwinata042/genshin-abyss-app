@@ -40,5 +40,6 @@ export default function CharacterList(props: {
   const characterCardList = filteredChars.map((character) => {
     return <CharacterCard key={v4()} characterInfo={character} />;
   });
+
   return <div className="character-list">{characterCardList}</div>;
 }
