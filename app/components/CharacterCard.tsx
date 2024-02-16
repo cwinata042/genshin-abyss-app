@@ -15,7 +15,11 @@ const CharacterCard = (props: { characterInfo: Character }) => {
       <div className="character-card-img">
         <div className={getStyle()}></div>
         <div className="triquetra"></div>
-        <img className="character-img" src={props.characterInfo.profile_img} />
+        <img
+          className="character-img"
+          src={props.characterInfo.profile_img}
+          alt={`${props.characterInfo.name}'s profile image.`}
+        />
       </div>
       <div className="character-name">{props.characterInfo.name}</div>
     </button>
