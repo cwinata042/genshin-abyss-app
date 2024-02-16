@@ -110,16 +110,16 @@ body {
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: #00000070;
+  background-color: #00000099;
 }
 
 .options-window {
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 92vw;
-  height: 85vh;
-  background-color: #151024;
+  width: 90vw;
+  height: 90vh;
+  background-color: #2f2a3b;
   padding: 15px 0px 15px 0px;
   border-radius: 15px;
 }
@@ -132,7 +132,7 @@ body {
 }
 
 .options-window .character-list {
-  padding: 0px;
+  padding: 10px 20px;
 }
 
 .options-window .character-filters {
