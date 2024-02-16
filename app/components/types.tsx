@@ -7,7 +7,9 @@ export type Character = {
   weapon: string;
   region: string;
   profile_img: string;
-  isVisible: boolean;
+  isOwned: boolean;
+  state: string;
+  teamPosition: number;
 };
 
 export type FilterType = {

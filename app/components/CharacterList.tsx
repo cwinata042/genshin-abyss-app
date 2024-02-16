@@ -8,14 +8,12 @@ export default function CharacterList(props: {
   currFilters: string[][];
 }) {
   let filteredChars = props.ownedCharacters;
-
   // Finds all characters with a matching element filter
   if (props.currFilters[0].length > 0) {
     filteredChars = filteredChars.filter((char) => {
       return props.currFilters[0].some((element) => element === char.element);
     });
   }
-
   // Finds all characters with a matching weapon type filter using array above
   if (props.currFilters[1].length > 0) {
     filteredChars = filteredChars.filter((char) => {
@@ -24,7 +22,6 @@ export default function CharacterList(props: {
       );
     });
   }
-
   // Finds all characters with a matching rarity filter using array above
   if (props.currFilters[2].length > 0) {
     filteredChars = filteredChars.filter((char) => {
@@ -33,7 +30,6 @@ export default function CharacterList(props: {
       );
     });
   }
-
   // Finds all characters with a matching gender filter using array above
   if (props.currFilters[3].length > 0) {
     filteredChars = filteredChars.filter((char) => {
