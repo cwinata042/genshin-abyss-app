@@ -41,7 +41,12 @@ export default function Container(props: {
         <div className="header">
           <div className="header-info">Genshin Abyss Randomizer</div>
           <button className="show-options" onClick={() => toggleOptions()}>
-            Set Character List
+            <div className="show-options-text">Edit Character List</div>
+            <img
+              className="options-icon"
+              src="/icons/other/Icon_Settings.webp"
+              alt="Options icon."
+            ></img>
           </button>
         </div>
         <Main

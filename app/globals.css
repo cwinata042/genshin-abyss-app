@@ -69,10 +69,38 @@ body {
 .header {
   display: flex;
   width: auto;
-  background-color: rgba(228, 187, 133, 0.4);
+  align-items: center;
+  grid-row: 1 / 2;
+  padding: 0px 40px 0px 40px;
+}
+
+.header-info {
+  font-size: 1.6rem;
+}
+
+.show-options {
+  margin-left: auto;
+  border: var(--cream);
+  color: var(--cream);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 3rem;
+  width: 15rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  grid-row: 1 / 2;
+}
+
+.options-icon {
+  width: 2.3rem;
+}
+
+.show-options-text {
+  font-size: 1.01rem;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .options-overlay {
