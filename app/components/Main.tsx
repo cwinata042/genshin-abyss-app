@@ -15,7 +15,7 @@ export default function Main(props: {
         weaponTypeData={props.weaponTypeData}
       />
       <div className="team-builder">
-        <div className="options">OPTIONS</div>
+        <div className="randomizer-options">OPTIONS</div>
         <div className="teams">TEAMS</div>
       </div>
     </div>
