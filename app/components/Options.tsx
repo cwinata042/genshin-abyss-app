@@ -10,7 +10,7 @@ export default function Options(props: {
   setOwned: Function;
 }) {
   const [ownedChars, setOwnedChars] = React.useState(props.allChars);
-  const [allSelected, setAllSelected] = React.useState(0);
+  const [allSelected, setAllSelected] = React.useState(props.allChars.length);
 
   function toggleOwned(char_id: number) {
     let newSelected = 0;
