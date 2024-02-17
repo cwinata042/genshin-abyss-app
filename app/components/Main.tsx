@@ -7,12 +7,19 @@ export default function Main(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
 }) {
+  // ADD THIS LATER
+  function toggleSelectedChars(char_id: number) {
+    console.log(`toggling character with id: ${char_id}!`);
+  }
+
   return (
     <div className="main">
       <Characters
         ownedCharacters={props.allChars}
         elementData={props.elementData}
         weaponTypeData={props.weaponTypeData}
+        handleToggle={toggleSelectedChars}
+        renderBans={true}
       />
       <div className="team-builder">
         <div className="randomizer-options">OPTIONS</div>

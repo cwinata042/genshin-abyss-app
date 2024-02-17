@@ -14,12 +14,16 @@ export default function Container(props: {
     props.allCharData.map((char) => {
       return {
         ...char,
-        isOwned: true,
+        isOwned: false,
         state: "Default",
         teamPosition: -1,
       };
     })
   );
+
+  function setOwned(newOwned: Character[]) {
+    setAllChars(newOwned);
+  }
 
   const [showOptions, setShowOptions] = React.useState(false);
 
@@ -31,10 +35,11 @@ export default function Container(props: {
     <div className="container">
       {showOptions && (
         <Options
-          allChars={props.allCharData}
+          allChars={allChars}
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
           toggleOptions={toggleOptions}
+          setOwned={setOwned}
         />
       )}
       <div className="wrapper">

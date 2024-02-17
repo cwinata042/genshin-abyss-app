@@ -1,27 +1,43 @@
 import React from "react";
 import { Character } from "./types";
 
-const CharacterCard = (props: { characterInfo: Character }) => {
-  function getStyle() {
+const CharacterCard = (props: {
+  characterInfo: Character;
+  handleToggle: Function;
+  renderBans: boolean;
+}) => {
+  function getRarityStyle() {
+    let styles = "";
     if (props.characterInfo.rarity) {
-      return props.characterInfo.rarity === 5 ? "five-star" : "four-star";
+      styles += props.characterInfo.rarity === 5 ? "five-star" : "four-star";
     } else {
-      return "default";
+      styles += "default";
     }
+
+    return styles;
+  }
+
+  function getCardStyle() {
+    return !props.renderBans && !props.characterInfo.isOwned
+      ? "character-card unowned"
+      : "character-card";
   }
 
   return (
-    <button className="character-card">
-      <div className="character-card-img">
-        <div className={getStyle()}></div>
-        <div className="triquetra"></div>
-        <img
-          className="character-img"
-          src={props.characterInfo.profile_img}
-          alt={`${props.characterInfo.name}'s profile image.`}
-        />
+    <button
+      className={getCardStyle()}
+      onClick={() => props.handleToggle(props.characterInfo.char_id)}
+    >
+      <div className="card">
+        <div className={`img-holder ${getRarityStyle()}`}>
+          <img
+            className="character-img"
+            src={props.characterInfo.profile_img}
+            alt={`${props.characterInfo.name}'s profile image.`}
+          />
+          <div className="character-name">{props.characterInfo.name}</div>
+        </div>
       </div>
-      <div className="character-name">{props.characterInfo.name}</div>
     </button>
   );
 };
