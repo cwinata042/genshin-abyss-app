@@ -10,9 +10,17 @@ export default function Options(props: {
   setOwned: Function;
 }) {
   const [ownedChars, setOwnedChars] = React.useState(props.allChars);
+  const [allSelected, setAllSelected] = React.useState(0);
 
   function toggleOwned(char_id: number) {
+    let newSelected = 0;
     const newChars = ownedChars.map((character) => {
+      if (character.isOwned && character.char_id !== char_id) {
+        newSelected++;
+      } else if (!character.isOwned && character.char_id === char_id) {
+        newSelected++;
+      }
+
       if (character.char_id === char_id) {
         return {
           ...character,
@@ -23,7 +31,42 @@ export default function Options(props: {
       }
     });
 
+    setAllSelected(newSelected);
     setOwnedChars(newChars);
+  }
+
+  function toggleSave() {
+    props.setOwned(ownedChars);
+    props.toggleOptions();
+  }
+
+  function toggleAll() {
+    let newChars;
+    if (allSelected !== ownedChars.length) {
+      newChars = ownedChars.map((character) => {
+        return {
+          ...character,
+          isOwned: true,
+        };
+      });
+
+      setAllSelected(ownedChars.length);
+    } else {
+      newChars = ownedChars.map((character) => {
+        return {
+          ...character,
+          isOwned: false,
+        };
+      });
+
+      setAllSelected(0);
+    }
+
+    setOwnedChars(newChars);
+  }
+
+  function getSelectButton() {
+    return allSelected !== ownedChars.length ? "Select All" : "Deselect All";
   }
 
   return (
@@ -37,11 +80,11 @@ export default function Options(props: {
           renderBans={false}
         />
         <div className="option-buttons">
-          <button
-            className="save-options"
-            onClick={() => props.setOwned(ownedChars)}
-          >
+          <button className="save-options" onClick={() => toggleSave()}>
             SAVE
+          </button>
+          <button className="close-options" onClick={() => toggleAll()}>
+            {getSelectButton()}
           </button>
           <button
             className="close-options"
