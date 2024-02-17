@@ -14,10 +14,18 @@
   --five-star-gradient: linear-gradient(#805248, #bd813c);
   --four-star-gradient: linear-gradient(#5f5581, #886ca5);
   --cream: #fffbf0;
+  --cream10: #fffbf010;
   --cream15: #fffbf015;
+  --cream25: #fffbf025;
+  --cream40: #fffbf025;
   --red: #fe4949;
   --dark-red: #d12d2d;
   --darker-red: #981212;
+  --green10: #9deab210;
+  --green25: #9deab225;
+  --green40: #9deab240;
+  --green50: #9deab250;
+  --light-green: #e5ffd9;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -50,25 +58,165 @@ body {
 }
 
 /* Contains the header and main */
+.container {
+  font-family: "Genshin Impact";
+}
+
 .wrapper {
   display: grid;
-  font-family: "Genshin Impact";
   grid-template-rows: repeat(12, 1fr);
   background-image: url("../public/img/abyss-background.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
 }
 
 .header {
   display: flex;
   width: auto;
-  background-color: rgba(228, 187, 133, 0.4);
+  align-items: center;
+  grid-row: 1 / 2;
+  padding: 0px 40px 0px 40px;
+}
+
+.header-info {
+  font-size: 1.6rem;
+}
+
+.show-options {
+  margin-left: auto;
+  border: var(--cream);
+  color: var(--cream);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 3rem;
+  width: 15rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  grid-row: 1 / 2;
+}
+
+.options-icon {
+  width: 2.3rem;
+}
+
+.show-options-text {
+  font-size: 1.01rem;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.options-overlay {
+  position: absolute;
+  display: flex;
+  z-index: 10;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000099;
+}
+
+.options-window {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 90vw;
+  height: 90vh;
+  background-color: #2f2a3b;
+  padding: 15px 0px 15px 0px;
+  border-radius: 15px;
+}
+
+.options-window .characters {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+}
+
+.options-window .character-list {
+  padding: 10px 20px;
+}
+
+.options-window .character-filters {
+  margin-top: auto;
+  padding: 15px 0px 15px 0px;
+}
+
+.option-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.save-options {
+  border: var(--green10);
+  color: var(--light-green);
+  background-color: var(--green25);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+  width: 8rem;
+  align-self: center;
+}
+
+.save-options:hover {
+  border: var(--green25);
+  background-color: var(--green40);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.save-options:active {
+  border: var(--green40);
+  background-color: var(--green50);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.close-options {
+  border: var(--cream10);
+  color: white;
+  background-color: var(--cream15);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+  width: 8rem;
+  align-self: center;
+}
+
+.close-options:hover {
+  border: var(--cream15);
+  background-color: var(--cream25);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.close-options:active {
+  border: var(--cream25);
+  background-color: var(--cream40);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
 }
 
 .main {
@@ -94,7 +242,7 @@ body {
   grid-template-columns: repeat(auto-fit, 133px);
   grid-template-rows: repeat(auto-fit, 179px);
 
-  overflow: auto;
+  overflow-y: scroll;
 
   justify-content: center;
   gap: 10px;
@@ -133,14 +281,30 @@ body {
 }
 
 .filter {
-  border: var(--cream15);
+  border: var(--cream10);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+}
+
+.filter:hover {
+  border: var(--cream10);
+  background-color: var(--cream10);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+}
+
+.filter:active {
+  border: var(--cream25);
+  background-color: none;
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
 }
 
 .filter.selected {
-  background-color: var(--cream15);
+  background-color: var(--cream25);
 }
 
 .filter-icon {
@@ -184,7 +348,7 @@ body {
   grid-column: 9 / 13;
 }
 
-.options {
+.randomizer-options {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,14 +372,10 @@ body {
   width: var(--character-card-width);
   height: var(--character-card-height);
   border-radius: 5px;
-}
-
-.character-card-img {
   position: relative;
 }
 
 .character-img {
-  position: relative;
   width: auto;
   height: var(--character-img-height);
   object-fit: cover;
@@ -223,15 +383,18 @@ body {
   display: block;
 }
 
-.triquetra {
-  position: absolute;
-  background-image: url(../public/icons/other/icon-triquetra.png);
+.unowned {
+  opacity: 0.5;
+}
+
+.img-holder {
+  position: relative;
+  background-image: url(../public/icons/other/icon-triquetra-faint.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 150%;
   width: var(--character-card-width);
   height: var(--character-img-height);
-  opacity: 0.03;
 }
 
 .five-star {

@@ -10,6 +10,8 @@ export default function Characters(props: {
   ownedCharacters: Character[];
   elementData: FilterType[];
   weaponTypeData: FilterType[];
+  handleToggle: Function;
+  renderBans: boolean;
 }) {
   const emptyFilters: string[][] = [[], [], [], []];
 
@@ -52,6 +54,8 @@ export default function Characters(props: {
       <CharacterList
         ownedCharacters={props.ownedCharacters}
         currFilters={currFilters}
+        handleToggle={props.handleToggle}
+        renderBans={props.renderBans}
       />
       <Filters
         elementData={props.elementData}

@@ -6,16 +6,16 @@ const { v4 } = require("uuid");
 export default function CharacterList(props: {
   ownedCharacters: Character[];
   currFilters: string[][];
+  handleToggle: Function;
+  renderBans: boolean;
 }) {
   let filteredChars = props.ownedCharacters;
-
   // Finds all characters with a matching element filter
   if (props.currFilters[0].length > 0) {
     filteredChars = filteredChars.filter((char) => {
       return props.currFilters[0].some((element) => element === char.element);
     });
   }
-
   // Finds all characters with a matching weapon type filter using array above
   if (props.currFilters[1].length > 0) {
     filteredChars = filteredChars.filter((char) => {
@@ -24,7 +24,6 @@ export default function CharacterList(props: {
       );
     });
   }
-
   // Finds all characters with a matching rarity filter using array above
   if (props.currFilters[2].length > 0) {
     filteredChars = filteredChars.filter((char) => {
@@ -33,7 +32,6 @@ export default function CharacterList(props: {
       );
     });
   }
-
   // Finds all characters with a matching gender filter using array above
   if (props.currFilters[3].length > 0) {
     filteredChars = filteredChars.filter((char) => {
@@ -41,8 +39,22 @@ export default function CharacterList(props: {
     });
   }
 
+  if (props.renderBans) {
+    filteredChars = filteredChars.filter((char) => {
+      return char.isOwned;
+    });
+  }
+
   const characterCardList = filteredChars.map((character) => {
-    return <CharacterCard key={v4()} characterInfo={character} />;
+    return (
+      <CharacterCard
+        key={v4()}
+        characterInfo={character}
+        handleToggle={props.handleToggle}
+        renderBans={props.renderBans}
+      />
+    );
   });
+
   return <div className="character-list">{characterCardList}</div>;
 }
