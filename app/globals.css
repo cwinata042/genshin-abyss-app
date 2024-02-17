@@ -15,10 +15,17 @@
   --four-star-gradient: linear-gradient(#5f5581, #886ca5);
   --cream: #fffbf0;
   --cream10: #fffbf010;
+  --cream15: #fffbf015;
   --cream25: #fffbf025;
+  --cream40: #fffbf025;
   --red: #fe4949;
   --dark-red: #d12d2d;
   --darker-red: #981212;
+  --green10: #9deab210;
+  --green25: #9deab225;
+  --green40: #9deab240;
+  --green50: #9deab250;
+  --light-green: #e5ffd9;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -140,9 +147,49 @@ body {
   padding: 15px 0px 15px 0px;
 }
 
+.option-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.save-options {
+  border: var(--green10);
+  color: var(--light-green);
+  background-color: var(--green25);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+  width: 8rem;
+  align-self: center;
+}
+
+.save-options:hover {
+  border: var(--green25);
+  background-color: var(--green40);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.save-options:active {
+  border: var(--green40);
+  background-color: var(--green50);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
 .close-options {
-  border: var(--red);
-  color: var(--red);
+  border: var(--cream10);
+  color: white;
+  background-color: var(--cream15);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -153,8 +200,8 @@ body {
 }
 
 .close-options:hover {
-  border: var(--dark-red);
-  color: var(--dark-red);
+  border: var(--cream15);
+  background-color: var(--cream25);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -163,8 +210,8 @@ body {
 }
 
 .close-options:active {
-  border: var(--darker-red);
-  color: var(--darker-red);
+  border: var(--cream25);
+  background-color: var(--cream40);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;

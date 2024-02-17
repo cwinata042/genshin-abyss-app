@@ -7,7 +7,25 @@ export default function Options(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
   toggleOptions: Function;
+  setOwned: Function;
 }) {
+  const [ownedChars, setOwnedChars] = React.useState(props.allChars);
+
+  function toggleOwned(char_id: number) {
+    const newChars = ownedChars.map((character) => {
+      if (character.char_id === char_id) {
+        return {
+          ...character,
+          isOwned: !character.isOwned,
+        };
+      } else {
+        return character;
+      }
+    });
+
+    setOwnedChars(newChars);
+  }
+
   return (
     <div className="options-overlay">
       <div className="options-window">
@@ -16,10 +34,20 @@ export default function Options(props: {
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
         />
-        <button className="close-options" onClick={() => props.toggleOptions()}>
-          {" "}
-          CLOSE{" "}
-        </button>
+        <div className="option-buttons">
+          <button
+            className="save-options"
+            onClick={() => props.setOwned(ownedChars)}
+          >
+            SAVE
+          </button>
+          <button
+            className="close-options"
+            onClick={() => props.toggleOptions()}
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -21,6 +21,10 @@ export default function Container(props: {
     })
   );
 
+  function setOwned(newOwned: Character[]) {
+    setAllChars(newOwned);
+  }
+
   const [showOptions, setShowOptions] = React.useState(false);
 
   function toggleOptions() {
@@ -35,6 +39,7 @@ export default function Container(props: {
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
           toggleOptions={toggleOptions}
+          setOwned={setOwned}
         />
       )}
       <div className="wrapper">
