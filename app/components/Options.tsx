@@ -30,9 +30,11 @@ export default function Options(props: {
     <div className="options-overlay">
       <div className="options-window">
         <Characters
-          ownedCharacters={props.allChars}
+          ownedCharacters={ownedChars}
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
+          handleToggle={toggleOwned}
+          renderBans={false}
         />
         <div className="option-buttons">
           <button

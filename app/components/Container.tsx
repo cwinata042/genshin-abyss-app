@@ -14,7 +14,7 @@ export default function Container(props: {
     props.allCharData.map((char) => {
       return {
         ...char,
-        isOwned: true,
+        isOwned: false,
         state: "Default",
         teamPosition: -1,
       };
@@ -35,7 +35,7 @@ export default function Container(props: {
     <div className="container">
       {showOptions && (
         <Options
-          allChars={props.allCharData}
+          allChars={allChars}
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
           toggleOptions={toggleOptions}

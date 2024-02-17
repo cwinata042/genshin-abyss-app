@@ -6,6 +6,8 @@ const { v4 } = require("uuid");
 export default function CharacterList(props: {
   ownedCharacters: Character[];
   currFilters: string[][];
+  handleToggle: Function;
+  renderBans: boolean;
 }) {
   let filteredChars = props.ownedCharacters;
   // Finds all characters with a matching element filter
@@ -37,8 +39,21 @@ export default function CharacterList(props: {
     });
   }
 
+  if (props.renderBans) {
+    filteredChars = filteredChars.filter((char) => {
+      return char.isOwned;
+    });
+  }
+
   const characterCardList = filteredChars.map((character) => {
-    return <CharacterCard key={v4()} characterInfo={character} />;
+    return (
+      <CharacterCard
+        key={v4()}
+        characterInfo={character}
+        handleToggle={props.handleToggle}
+        renderBans={props.renderBans}
+      />
+    );
   });
 
   return <div className="character-list">{characterCardList}</div>;
