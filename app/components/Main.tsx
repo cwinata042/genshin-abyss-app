@@ -42,7 +42,7 @@ export default function Main(props: {
     return defaultArr;
   });
 
-  const sortedOwned = props.allChars.toSorted((a, b) => {
+  const sortedOwned = [...props.allChars].sort((a, b) => {
     return b.state - a.state;
   });
 
