@@ -2,6 +2,7 @@ import React from "react";
 import { Character, FilterType, State } from "./types";
 import Characters from "./Characters";
 import Selector from "./Selector";
+import Team from "./Team";
 
 export default function Main(props: {
   allChars: Character[];
@@ -9,10 +10,7 @@ export default function Main(props: {
   weaponTypeData: FilterType[];
   setState: Function;
 }) {
-  // ADD THIS LATER
-  function toggleSelectedChars(char_id: number) {
-    console.log(`toggling character with id: ${char_id}!`);
-  }
+  const [selectedTeam, setSelectedTeam] = React.useState(0);
 
   const [selectedChars, setSelectedChars] = React.useState(() => {
     let defaultArr: Character[][] = [[], []];
@@ -46,6 +44,13 @@ export default function Main(props: {
     return b.state - a.state;
   });
 
+  // ADD THIS LATER
+  function toggleSelectedChars(char_id: number) {
+    const newChar: Character = props.allChars.filter((char) => {
+      return char.char_id === char_id;
+    })[0];
+  }
+
   return (
     <div className="main">
       <Characters
@@ -61,7 +66,10 @@ export default function Main(props: {
           ownedCharacters={props.allChars}
           setState={props.setState}
         />
-        <div className="teams">TEAMS</div>
+        <Team
+          selectedChars={selectedChars}
+          handleToggle={toggleSelectedChars}
+        />
       </div>
     </div>
   );

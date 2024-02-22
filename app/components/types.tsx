@@ -22,4 +22,5 @@ export enum State {
   Lock = 2,
   Default = 1,
   Ban = 0,
+  Pick = -1,
 }
