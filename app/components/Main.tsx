@@ -1,17 +1,16 @@
 import React from "react";
-import { Character, FilterType } from "./types";
+import { Character, FilterType, State } from "./types";
 import Characters from "./Characters";
 import Selector from "./Selector";
+import Team from "./Team";
 
 export default function Main(props: {
   allChars: Character[];
   elementData: FilterType[];
   weaponTypeData: FilterType[];
+  setState: Function;
 }) {
-  // ADD THIS LATER
-  function toggleSelectedChars(char_id: number) {
-    console.log(`toggling character with id: ${char_id}!`);
-  }
+  const [selectedTeam, setSelectedTeam] = React.useState(0);
 
   const [selectedChars, setSelectedChars] = React.useState(() => {
     let defaultArr: Character[][] = [[], []];
@@ -25,7 +24,7 @@ export default function Main(props: {
       region: "None",
       profile_img: "/img/Default_Icon.svg",
       isOwned: true,
-      state: "Default",
+      state: State.Default,
       teamPosition: 0,
     };
 
@@ -41,10 +40,21 @@ export default function Main(props: {
     return defaultArr;
   });
 
+  const sortedOwned = props.allChars.toSorted((a, b) => {
+    return b.state - a.state;
+  });
+
+  // ADD THIS LATER
+  function toggleSelectedChars(char_id: number) {
+    const newChar: Character = props.allChars.filter((char) => {
+      return char.char_id === char_id;
+    })[0];
+  }
+
   return (
     <div className="main">
       <Characters
-        ownedCharacters={props.allChars}
+        ownedCharacters={sortedOwned}
         elementData={props.elementData}
         weaponTypeData={props.weaponTypeData}
         handleToggle={toggleSelectedChars}
@@ -54,8 +64,12 @@ export default function Main(props: {
         <Selector
           selectedChars={selectedChars}
           ownedCharacters={props.allChars}
+          setState={props.setState}
         />
-        <div className="teams">TEAMS</div>
+        <Team
+          selectedChars={selectedChars}
+          handleToggle={toggleSelectedChars}
+        />
       </div>
     </div>
   );

@@ -22,6 +22,7 @@
   --red: #fe4949;
   --dark-red: #d12d2d;
   --darker-red: #981212;
+  --darkest-red: #4e1c1c;
   --green10: #9deab210;
   --green25: #9deab225;
   --green40: #9deab240;
@@ -30,9 +31,15 @@
   --green: #9ce67b;
   --dark-green: #7ecf58;
   --darker-green: #5da53b;
-  --gray: #b6b6b6;
-  --dark-gray: #8f8f8f;
-  --darker-gray: #6e6e6e;
+  --red10: #fe494910;
+  --red25: #fe494925;
+  --red40: #fe494940;
+  --red50: #fe494950;
+  --gray10: #b6b6b610;
+  --gray25: #b6b6b625;
+  --gray40: #b6b6b640;
+  --gray50: #b6b6b650;
+  --dark-gray: #6d6d6d;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -96,7 +103,7 @@ body {
 }
 
 .show-options {
-  margin-left: auto;
+  margin-left: 20px;
   border: var(--cream);
   color: var(--cream);
   border-style: solid;
@@ -108,6 +115,36 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.reset-picks {
+  margin-left: auto;
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:hover {
+  margin-left: auto;
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:active {
+  margin-left: auto;
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
 }
 
 .options-icon {
@@ -358,15 +395,16 @@ body {
 /** TEAM BUILDER **/
 .team-builder {
   display: grid;
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(16, 1fr);
   grid-column: 9 / 13;
   max-height: 100vh;
   min-height: 0;
   background-color: var(--cream10);
+  margin: 0px 10px 0px 10px;
 }
 
 .selector {
-  grid-row: 1 / 6;
+  grid-row: 1 / 7;
 
   display: grid;
   grid-template-rows: repeat(6, 1fr);
@@ -389,6 +427,7 @@ body {
   display: flex;
   gap: 15px;
   justify-content: center;
+  margin-top: 10px;
   padding-bottom: 10px;
 }
 
@@ -461,8 +500,8 @@ body {
 }
 
 .ban-button {
-  border: var(--red);
-  color: var(--red);
+  border: var(--red50);
+  background-color: var(--red50);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -471,8 +510,8 @@ body {
 }
 
 .ban-button:hover {
-  border: var(--dark-red);
-  color: var(--dark-red);
+  border: var(--red40);
+  background-color: var(--red40);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -480,8 +519,7 @@ body {
 }
 
 .ban-button:active {
-  border: var(--darker-red);
-  color: var(--darker-red);
+  border: var(--red10);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -489,8 +527,8 @@ body {
 }
 
 .lock-button {
-  border: var(--gray);
-  color: var(--gray);
+  border: var(--gray50);
+  background-color: var(--gray50);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -499,8 +537,8 @@ body {
 }
 
 .lock-button:hover {
-  border: var(--dark-gray);
-  color: var(--dark-gray);
+  border: var(--gray40);
+  background-color: var(--gray40);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -508,8 +546,7 @@ body {
 }
 
 .lock-button:active {
-  border: var(--darker-gray);
-  color: var(--darker-gray);
+  border: var(--gray10);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -553,11 +590,33 @@ body {
 }
 
 .teams {
-  display: flex;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-row: 8 / 17;
+  padding: 0px 17px 0px 17px;
+  gap: 20px;
+  overflow: hidden;
   align-items: center;
-  justify-content: center;
-  background-color: rgba(209, 160, 113, 0.4);
-  grid-row: 6 / 13;
+}
+
+.teams .character-list {
+  overflow: hidden;
+  display: flex;
+}
+
+.team {
+  display: flex;
+  align-self: center;
+  background-color: #a1b6d020;
+  border-radius: 5px;
+}
+
+.team-name {
+  align-self: center;
+  padding-top: 10px;
+  font-size: 1.4rem;
+  margin: 5px 5px 5px 10px;
+  width: 110px;
 }
 
 /* CHARACTER CARD */
@@ -580,6 +639,32 @@ body {
 }
 
 .unowned {
+  opacity: 0.5;
+}
+
+.ban {
+  opacity: 0.5;
+}
+
+.lock {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: var(--character-card-height);
+  background-image: url(../public/icons/Icon_Lock.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  background-color: #00000020;
+  opacity: 0.9;
+}
+
+.ban {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: var(--character-card-height);
+  background-color: var(--darkest-red);
   opacity: 0.5;
 }
 
