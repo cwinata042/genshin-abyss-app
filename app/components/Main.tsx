@@ -46,38 +46,58 @@ export default function Main(props: {
     return b.state - a.state;
   });
 
-  // ADD THIS LATER
   function toggleSelectedChars(char_id: number) {
+    // Finds the selected character
     const newChar: Character = props.allChars.filter((char) => {
       return char.char_id === char_id;
     })[0];
 
+    // Sets up new selected character array
     let newSelected: Character[][] = selectedChars;
+
+    // Determines if character is in selected or other team
+    const otherTeam: number = selectedTeam === 0 ? 1 : 0;
     const foundSelected: boolean =
       selectedChars[selectedTeam].filter((char) => {
         return char.char_id === char_id;
       }).length === 1;
+    const foundOther: boolean =
+      selectedChars[otherTeam].filter((char) => {
+        return char.char_id === char_id;
+      }).length === 1;
 
+    // Sets up new index
     let index: number;
 
-    // Do not continue if character is banned or locked
-    if (
-      newChar.state !== State.Default ||
-      selectedChars[selectedTeam][3].char_id !== -1
-    ) {
+    // Do not continue if character is empty
+    // Or is banned or locked
+    // Or is in the other team
+    if (char_id === -1 || newChar.state !== State.Default || foundOther) {
       return;
     } else if (!foundSelected) {
+      // If not in selected team, find empty slot
       index = selectedChars[selectedTeam].findIndex((char) => {
         return char.char_id === -1;
       });
+
+      // Add the new character if there are empty spots
+      if (index !== -1) {
+        newSelected[selectedTeam][index] = newChar;
+      }
     } else {
+      // If in selected team, find spot
       index = selectedChars[selectedTeam].findIndex((char) => {
         return char.char_id === char_id;
       });
+
+      // Replace character with default character
+      newSelected[selectedTeam][index] = defaultChar;
     }
 
-    newSelected[selectedTeam][index] = newChar;
+    // Toggles the character's position in the team
     props.togglePosition(index, char_id);
+
+    // Sets the selected characters to the new Character[][]
     setSelectedChars(newSelected);
   }
 

@@ -71,6 +71,9 @@ export default function Selector(props: {
     setRandomChars(newList);
   }
 
+  // FIX TO HANDLE TEAM
+  // IF BAN: REMOVE
+  // IF SELECT: ADD
   function handleConfirm(type: State) {
     props.setState(type, randomChars);
 
