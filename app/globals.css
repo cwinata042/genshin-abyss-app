@@ -103,7 +103,7 @@ body {
 }
 
 .show-options {
-  margin-left: auto;
+  margin-left: 20px;
   border: var(--cream);
   color: var(--cream);
   border-style: solid;
@@ -115,6 +115,36 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.reset-picks {
+  margin-left: auto;
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:hover {
+  margin-left: auto;
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:active {
+  margin-left: auto;
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
 }
 
 .options-icon {
@@ -603,6 +633,7 @@ body {
   background-position: center;
   background-size: 50%;
   background-color: #00000020;
+  opacity: 0.9;
 }
 
 .ban {

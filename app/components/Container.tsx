@@ -48,6 +48,17 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  function resetState() {
+    const newChars: Character[] = allChars.map((char) => {
+      return {
+        ...char,
+        state: State.Default,
+      };
+    });
+
+    setAllChars(newChars);
+  }
+
   const [showOptions, setShowOptions] = React.useState(false);
 
   function toggleOptions() {
@@ -68,6 +79,9 @@ export default function Container(props: {
       <div className="wrapper">
         <div className="header">
           <div className="header-info">Genshin Abyss Randomizer</div>
+          <button className="reset-picks" onClick={() => resetState()}>
+            <div className="show-options-text">Reset Bans/Locks</div>
+          </button>
           <button className="show-options" onClick={() => toggleOptions()}>
             <div className="show-options-text">Edit Character List</div>
             <img
