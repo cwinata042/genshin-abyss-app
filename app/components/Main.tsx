@@ -9,24 +9,26 @@ export default function Main(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
   setState: Function;
+  togglePosition: Function;
 }) {
   const [selectedTeam, setSelectedTeam] = React.useState(0);
 
+  const defaultChar: Character = {
+    char_id: -1,
+    name: "--",
+    gender: "None",
+    rarity: -1,
+    element: "None",
+    weapon: "None",
+    region: "None",
+    profile_img: "/img/Default_Icon.svg",
+    isOwned: true,
+    state: State.Default,
+    teamPosition: 0,
+  };
+
   const [selectedChars, setSelectedChars] = React.useState(() => {
     let defaultArr: Character[][] = [[], []];
-    let defaultChar: Character = {
-      char_id: -1,
-      name: "--",
-      gender: "None",
-      rarity: -1,
-      element: "None",
-      weapon: "None",
-      region: "None",
-      profile_img: "/img/Default_Icon.svg",
-      isOwned: true,
-      state: State.Default,
-      teamPosition: 0,
-    };
 
     for (let x = 0; x < 2; x++) {
       for (let y = 0; y < 4; y++) {
@@ -40,15 +42,63 @@ export default function Main(props: {
     return defaultArr;
   });
 
-  const sortedOwned = props.allChars.toSorted((a, b) => {
+  const sortedOwned = [...props.allChars].sort((a, b) => {
     return b.state - a.state;
   });
 
-  // ADD THIS LATER
   function toggleSelectedChars(char_id: number) {
+    // Finds the selected character
     const newChar: Character = props.allChars.filter((char) => {
       return char.char_id === char_id;
     })[0];
+
+    // Sets up new selected character array
+    let newSelected: Character[][] = selectedChars;
+
+    // Determines if character is in selected or other team
+    const otherTeam: number = selectedTeam === 0 ? 1 : 0;
+    const foundSelected: boolean =
+      selectedChars[selectedTeam].filter((char) => {
+        return char.char_id === char_id;
+      }).length === 1;
+    const foundOther: boolean =
+      selectedChars[otherTeam].filter((char) => {
+        return char.char_id === char_id;
+      }).length === 1;
+
+    // Sets up new index
+    let index: number;
+
+    // Do not continue if character is empty
+    // Or is banned or locked
+    // Or is in the other team
+    if (char_id === -1 || newChar.state !== State.Default || foundOther) {
+      return;
+    } else if (!foundSelected) {
+      // If not in selected team, find empty slot
+      index = selectedChars[selectedTeam].findIndex((char) => {
+        return char.char_id === -1;
+      });
+
+      // Add the new character if there are empty spots
+      if (index !== -1) {
+        newSelected[selectedTeam][index] = newChar;
+      }
+    } else {
+      // If in selected team, find spot
+      index = selectedChars[selectedTeam].findIndex((char) => {
+        return char.char_id === char_id;
+      });
+
+      // Replace character with default character
+      newSelected[selectedTeam][index] = defaultChar;
+    }
+
+    // Toggles the character's position in the team
+    props.togglePosition(index, char_id);
+
+    // Sets the selected characters to the new Character[][]
+    setSelectedChars(newSelected);
   }
 
   return (
@@ -68,6 +118,8 @@ export default function Main(props: {
         />
         <Team
           selectedChars={selectedChars}
+          selectedTeam={selectedTeam}
+          setSelectedTeam={setSelectedTeam}
           handleToggle={toggleSelectedChars}
         />
       </div>

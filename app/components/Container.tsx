@@ -48,6 +48,21 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  function togglePosition(position: number, char_id: number) {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.char_id === char_id) {
+        return {
+          ...char,
+          position: char.teamPosition === position ? -1 : position,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
   function resetState() {
     const newChars: Character[] = allChars.map((char) => {
       return {
@@ -96,6 +111,7 @@ export default function Container(props: {
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
           setState={setState}
+          togglePosition={togglePosition}
         />
       </div>
     </div>

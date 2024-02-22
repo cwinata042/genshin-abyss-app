@@ -609,14 +609,27 @@ body {
   align-self: center;
   background-color: #a1b6d020;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.team:hover {
+  background-color: #a1b6d028;
+}
+
+.selected-team:hover {
+  background-color: #a1b6d050;
 }
 
 .team-name {
   align-self: center;
   padding-top: 10px;
   font-size: 1.4rem;
-  margin: 5px 5px 5px 10px;
+  margin: 5px 5px 5px 30px;
   width: 110px;
+}
+
+.selected-team {
+  background-color: #a1b6d050;
 }
 
 /* CHARACTER CARD */
