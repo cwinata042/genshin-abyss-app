@@ -10,7 +10,7 @@ export default function Main(props: {
   weaponTypeData: FilterType[];
   setState: Function;
 }) {
-  const [selectedTeam, setSelectedTeam] = React.useState(0);
+  const [selectedTeam, setSelectedTeam] = React.useState(1);
 
   const [selectedChars, setSelectedChars] = React.useState(() => {
     let defaultArr: Character[][] = [[], []];
@@ -68,6 +68,8 @@ export default function Main(props: {
         />
         <Team
           selectedChars={selectedChars}
+          selectedTeam={selectedTeam}
+          setSelectedTeam={setSelectedTeam}
           handleToggle={toggleSelectedChars}
         />
       </div>
