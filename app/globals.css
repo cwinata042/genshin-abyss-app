@@ -13,6 +13,7 @@
   --background-end-rgb: 255, 255, 255;
   --five-star-gradient: linear-gradient(#805248, #bd813c);
   --four-star-gradient: linear-gradient(#5f5581, #886ca5);
+  --default-gradient: linear-gradient(#65696f, #848788);
   --cream: #fffbf0;
   --cream10: #fffbf010;
   --cream15: #fffbf015;
@@ -26,9 +27,18 @@
   --green40: #9deab240;
   --green50: #9deab250;
   --light-green: #e5ffd9;
+  --green: #9ce67b;
+  --dark-green: #7ecf58;
+  --darker-green: #5da53b;
+  --gray: #b6b6b6;
+  --dark-gray: #8f8f8f;
+  --darker-gray: #6e6e6e;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
+  --character-card-width-s: 106.4px;
+  --character-card-height-s: 143.2px;
+  --character-img-height-s: 120.8px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -250,18 +260,22 @@ body {
   grid-row: 1 / 12;
 }
 
+.random-character-list::-webkit-scrollbar,
 .character-list::-webkit-scrollbar {
   width: 8px;
 }
 
+.random-character-list::-webkit-scrollbar-thumb,
 .character-list::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: var(--cream);
 }
 
+.random-character-list::-webkit-scrollbar-thumb:hover,
 .character-list::-webkit-scrollbar-thumb:hover {
   background-color: #cecbc2;
 }
+.random-character-list::-webkit-scrollbar-track,
 .character-list::-webkit-scrollbar-track {
   padding: 2px 0;
   background-color: rgba(217, 217, 217, 0.2);
@@ -346,14 +360,196 @@ body {
   display: grid;
   grid-template-rows: repeat(12, 1fr);
   grid-column: 9 / 13;
+  max-height: 100vh;
+  min-height: 0;
+  background-color: var(--cream10);
 }
 
-.randomizer-options {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(216, 179, 56, 0.4);
+.selector {
   grid-row: 1 / 6;
+
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.selector-options {
+  grid-row: 1 / 2;
+  padding: 10px 0px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selector-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.selector-confirm {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.number-input {
+  color: black;
+  margin-left: 10px;
+  padding: 3px 3px 3px 6px;
+  border-radius: 5px;
+  width: 3rem;
+}
+
+.randomize-button {
+  border: var(--green);
+  color: var(--green);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.randomize-button:hover {
+  border: var(--dark-green);
+  color: var(--dark-green);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.randomize-button:active {
+  border: var(--darker-green);
+  color: var(--darker-green);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.clear-button {
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.clear-button:hover {
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.clear-button:active {
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+  height: 2.125rem;
+}
+
+.ban-button {
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+  font-size: 1.4rem;
+}
+
+.ban-button:hover {
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.ban-button:active {
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.lock-button {
+  border: var(--gray);
+  color: var(--gray);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+  font-size: 1.4rem;
+}
+
+.lock-button:hover {
+  border: var(--dark-gray);
+  color: var(--dark-gray);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.lock-button:active {
+  border: var(--darker-gray);
+  color: var(--darker-gray);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.random-character-list {
+  padding: 10px 10px;
+  display: grid;
+  grid-row: 2 / 7;
+  grid-template-columns: repeat(auto-fit, 106.4px);
+  grid-template-rows: repeat(auto-fit, 143.2px);
+
+  overflow-y: scroll;
+
+  justify-content: center;
+  gap: 10px;
+}
+
+.random-character-list .character-name {
+  font-size: 0.75em;
+  line-height: 22.39px;
+}
+
+.random-character-list .character-card,
+.random-character-list .five-star,
+.random-character-list .four-star,
+.random-character-list .img-holder {
+  width: var(--character-card-width-s);
+}
+
+.random-character-list .character-card {
+  height: var(--character-card-height-s);
+}
+
+.random-character-list .five-star,
+.random-character-list .four-star,
+.random-character-list .img-holder,
+.random-character-list .character-img {
+  height: var(--character-img-height-s);
 }
 
 .teams {
@@ -399,20 +595,38 @@ body {
 
 .five-star {
   position: absolute;
-  background: var(--five-star-gradient);
+  background-image: url(../public/icons/other/icon-triquetra-faint.png),
+    var(--five-star-gradient);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
   width: var(--character-card-width);
   height: var(--character-img-height);
 }
 
 .four-star {
   position: absolute;
-  background: var(--four-star-gradient);
+  background-image: url(../public/icons/other/icon-triquetra-faint.png),
+    var(--four-star-gradient);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
+  width: var(--character-card-width);
+  height: var(--character-img-height);
+}
+
+.default {
+  position: absolute;
+  background-image: url(../public/icons/other/icon-triquetra-faint.png),
+    var(--default-gradient);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150%;
   width: var(--character-card-width);
   height: var(--character-img-height);
 }
 
 .character-name {
-  height: 100%;
   width: 100%;
   line-height: 28px;
   align-self: center;

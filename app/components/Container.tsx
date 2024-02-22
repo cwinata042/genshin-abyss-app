@@ -11,18 +11,26 @@ export default function Container(props: {
   weaponTypeData: FilterType[];
 }) {
   const [allChars, setAllChars] = React.useState(
-    props.allCharData.map((char) => {
-      return {
-        ...char,
-        isOwned: false,
-        state: "Default",
-        teamPosition: -1,
-      };
-    })
+    props.allCharData
+      .map((char) => {
+        return {
+          ...char,
+          isOwned: true,
+          state: "Default",
+          teamPosition: -1,
+        };
+      })
+      .sort((a, b) => {
+        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+      })
   );
 
   function setOwned(newOwned: Character[]) {
-    setAllChars(newOwned);
+    setAllChars(
+      newOwned.sort((a, b) => {
+        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+      })
+    );
   }
 
   const [showOptions, setShowOptions] = React.useState(false);
