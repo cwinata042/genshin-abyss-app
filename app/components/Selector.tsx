@@ -1,11 +1,12 @@
 import React from "react";
-import { Character } from "./types";
+import { Character, State } from "./types";
 import CharacterCard from "./CharacterCard";
 const { v4 } = require("uuid");
 
 export default function Selector(props: {
   selectedChars: Character[][];
   ownedCharacters: Character[];
+  setState: Function;
 }) {
   let defaultChar: Character = {
     char_id: -1,
@@ -17,7 +18,7 @@ export default function Selector(props: {
     region: "None",
     profile_img: "/img/Default_Icon.svg",
     isOwned: true,
-    state: "Default",
+    state: State.Default,
     teamPosition: 0,
   };
 
@@ -27,7 +28,7 @@ export default function Selector(props: {
   );
 
   const totalOwned = props.ownedCharacters.filter((char) => {
-    return char.isOwned;
+    return char.isOwned && char.state === State.Default;
   }).length;
 
   // REPLACE WITH TOGGLE FUNCTION FROM MAIN
@@ -48,14 +49,11 @@ export default function Selector(props: {
         return char.char_id === newRan;
       });
 
-      console.log(newRan);
-      console.log(newRanChar);
-
       // If character already selected or is not owned or is banned/selected
       while (
         newRanChars.includes(newRan) ||
         !newRanChar[0].isOwned ||
-        newRanChar[0].state !== "Default"
+        newRanChar[0].state !== State.Default
       ) {
         newRan = Math.floor(Math.random() * props.ownedCharacters.length);
         newRanChar = props.ownedCharacters.filter((char) => {
@@ -73,15 +71,15 @@ export default function Selector(props: {
     setRandomChars(newList);
   }
 
-  function handleConfirm(type: String) {
+  function handleConfirm(type: State) {
+    props.setState(type, randomChars);
+
     clearRandomize();
   }
 
-  function handleInvalidCharCount(e) {
-    if (e.value < 1) {
-      e.value = 1;
-    } else if (e.value > totalOwned) {
-      e.value = totalOwned;
+  function handleInvalidCharCount(e: HTMLTextAreaElement) {
+    if (Number(e.value) > totalOwned) {
+      e.value = String(totalOwned);
     }
 
     setNumChars(e.value);
@@ -119,7 +117,9 @@ export default function Selector(props: {
             min="1"
             max={totalOwned}
             value={numChars}
-            onKeyUp={(e) => handleInvalidCharCount(e.target)}
+            onKeyUp={(e) =>
+              handleInvalidCharCount(e.target as HTMLTextAreaElement)
+            }
             onInput={(e) =>
               setNumChars((e.target as HTMLTextAreaElement).value)
             }
@@ -136,10 +136,13 @@ export default function Selector(props: {
       </div>
       <div className="random-character-list">{ranCharCards}</div>
       <div className="selector-confirm">
-        <button className="ban-button" onClick={() => handleConfirm("Ban")}>
+        <button className="ban-button" onClick={() => handleConfirm(State.Ban)}>
           Ban
         </button>
-        <button className="lock-button" onClick={() => handleConfirm("Lock")}>
+        <button
+          className="lock-button"
+          onClick={() => handleConfirm(State.Lock)}
+        >
           Lock
         </button>
       </div>

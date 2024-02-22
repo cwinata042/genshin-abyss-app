@@ -1,5 +1,5 @@
 import React from "react";
-import { Character, FilterType } from "./types";
+import { Character, FilterType, State } from "./types";
 import Characters from "./Characters";
 import Selector from "./Selector";
 
@@ -7,6 +7,7 @@ export default function Main(props: {
   allChars: Character[];
   elementData: FilterType[];
   weaponTypeData: FilterType[];
+  setState: Function;
 }) {
   // ADD THIS LATER
   function toggleSelectedChars(char_id: number) {
@@ -25,7 +26,7 @@ export default function Main(props: {
       region: "None",
       profile_img: "/img/Default_Icon.svg",
       isOwned: true,
-      state: "Default",
+      state: State.Default,
       teamPosition: 0,
     };
 
@@ -41,10 +42,14 @@ export default function Main(props: {
     return defaultArr;
   });
 
+  const sortedOwned = props.allChars.toSorted((a, b) => {
+    return b.state - a.state;
+  });
+
   return (
     <div className="main">
       <Characters
-        ownedCharacters={props.allChars}
+        ownedCharacters={sortedOwned}
         elementData={props.elementData}
         weaponTypeData={props.weaponTypeData}
         handleToggle={toggleSelectedChars}
@@ -54,6 +59,7 @@ export default function Main(props: {
         <Selector
           selectedChars={selectedChars}
           ownedCharacters={props.allChars}
+          setState={props.setState}
         />
         <div className="teams">TEAMS</div>
       </div>

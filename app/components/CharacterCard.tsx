@@ -1,5 +1,5 @@
 import React from "react";
-import { Character } from "./types";
+import { Character, State } from "./types";
 
 const CharacterCard = (props: {
   characterInfo: Character;
@@ -18,9 +18,27 @@ const CharacterCard = (props: {
   }
 
   function getCardStyle() {
-    return !props.renderBans && !props.characterInfo.isOwned
-      ? "character-card unowned"
-      : "character-card";
+    let styles = "";
+    styles +=
+      !props.renderBans && !props.characterInfo.isOwned
+        ? "character-card unowned"
+        : "character-card";
+
+    return styles;
+  }
+
+  function getBanStyle() {
+    let styles = "card";
+    // Renders bans
+    if (props.renderBans) {
+      if (props.characterInfo.state === State.Ban) {
+        styles += " ban";
+      } else if (props.characterInfo.state === State.Lock) {
+        styles += " lock";
+      }
+    }
+
+    return styles;
   }
 
   return (
@@ -36,6 +54,9 @@ const CharacterCard = (props: {
         />
         <div className="character-name">{props.characterInfo.name}</div>
       </div>
+      {props.characterInfo.state !== State.Default && (
+        <div className={getBanStyle()}></div>
+      )}
     </button>
   );
 };

@@ -22,6 +22,7 @@
   --red: #fe4949;
   --dark-red: #d12d2d;
   --darker-red: #981212;
+  --darkest-red: #4e1c1c;
   --green10: #9deab210;
   --green25: #9deab225;
   --green40: #9deab240;
@@ -38,6 +39,7 @@
   --gray25: #b6b6b625;
   --gray40: #b6b6b640;
   --gray50: #b6b6b650;
+  --dark-gray: #6d6d6d;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -584,6 +586,31 @@ body {
 }
 
 .unowned {
+  opacity: 0.5;
+}
+
+.ban {
+  opacity: 0.5;
+}
+
+.lock {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: var(--character-card-height);
+  background-image: url(../public/icons/Icon_Lock.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  background-color: #00000020;
+}
+
+.ban {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: var(--character-card-height);
+  background-color: var(--darkest-red);
   opacity: 0.5;
 }
 
