@@ -30,9 +30,14 @@
   --green: #9ce67b;
   --dark-green: #7ecf58;
   --darker-green: #5da53b;
-  --gray: #b6b6b6;
-  --dark-gray: #8f8f8f;
-  --darker-gray: #6e6e6e;
+  --red10: #fe494910;
+  --red25: #fe494925;
+  --red40: #fe494940;
+  --red50: #fe494950;
+  --gray10: #b6b6b610;
+  --gray25: #b6b6b625;
+  --gray40: #b6b6b640;
+  --gray50: #b6b6b650;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -389,6 +394,7 @@ body {
   display: flex;
   gap: 15px;
   justify-content: center;
+  margin-top: 10px;
   padding-bottom: 10px;
 }
 
@@ -461,8 +467,8 @@ body {
 }
 
 .ban-button {
-  border: var(--red);
-  color: var(--red);
+  border: var(--red50);
+  background-color: var(--red50);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -471,8 +477,8 @@ body {
 }
 
 .ban-button:hover {
-  border: var(--dark-red);
-  color: var(--dark-red);
+  border: var(--red40);
+  background-color: var(--red40);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -480,8 +486,7 @@ body {
 }
 
 .ban-button:active {
-  border: var(--darker-red);
-  color: var(--darker-red);
+  border: var(--red10);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -489,8 +494,8 @@ body {
 }
 
 .lock-button {
-  border: var(--gray);
-  color: var(--gray);
+  border: var(--gray50);
+  background-color: var(--gray50);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -499,8 +504,8 @@ body {
 }
 
 .lock-button:hover {
-  border: var(--dark-gray);
-  color: var(--dark-gray);
+  border: var(--gray40);
+  background-color: var(--gray40);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;
@@ -508,8 +513,7 @@ body {
 }
 
 .lock-button:active {
-  border: var(--darker-gray);
-  color: var(--darker-gray);
+  border: var(--gray10);
   border-style: solid;
   border-width: 0.13rem;
   border-radius: 0.5rem;

@@ -64,7 +64,9 @@ export default function Selector(props: {
     setRandomChars(newList);
   }
 
-  function handleConfirm(type: String) {}
+  function handleConfirm(type: String) {
+    clearRandomize();
+  }
 
   // Creates Character List with random chars array
   const ranCharCards = randomChars.map((num, i) => {
