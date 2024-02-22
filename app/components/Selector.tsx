@@ -26,10 +26,19 @@ export default function Selector(props: {
     Array(Number(numChars)).fill(-1)
   );
 
+  const totalOwned = props.ownedCharacters.filter((char) => {
+    return char.isOwned;
+  }).length;
+
   // REPLACE WITH TOGGLE FUNCTION FROM MAIN
   function handleToggle() {}
 
   function handleRandomize() {
+    if (Number(numChars) > totalOwned) {
+      console.log("Not enough owned characters to randomize!");
+      return;
+    }
+
     setRandomChars([]);
 
     let newRanChars: Number[] = [];
@@ -68,6 +77,16 @@ export default function Selector(props: {
     clearRandomize();
   }
 
+  function handleInvalidCharCount(e) {
+    if (e.value < 1) {
+      e.value = 1;
+    } else if (e.value > totalOwned) {
+      e.value = totalOwned;
+    }
+
+    setNumChars(e.value);
+  }
+
   // Creates Character List with random chars array
   const ranCharCards = randomChars.map((num, i) => {
     let ranChar;
@@ -98,8 +117,9 @@ export default function Selector(props: {
             className="number-input"
             type="number"
             min="1"
-            max="20"
+            max={totalOwned}
             value={numChars}
+            onKeyUp={(e) => handleInvalidCharCount(e.target)}
             onInput={(e) =>
               setNumChars((e.target as HTMLTextAreaElement).value)
             }

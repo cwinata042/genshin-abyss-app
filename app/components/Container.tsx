@@ -25,7 +25,7 @@ export default function Container(props: {
       })
   );
 
-  function setOwned(newOwned: Character[]) {
+  function updateOwned(newOwned: Character[]) {
     setAllChars(
       newOwned.sort((a, b) => {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
@@ -47,7 +47,7 @@ export default function Container(props: {
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
           toggleOptions={toggleOptions}
-          setOwned={setOwned}
+          setOwned={updateOwned}
         />
       )}
       <div className="wrapper">
