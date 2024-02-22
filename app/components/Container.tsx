@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Character, FilterType } from "./types";
+import { Character, FilterType, State } from "./types";
 import Options from "./Options";
 import Main from "./Main";
 
@@ -10,13 +10,13 @@ export default function Container(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
 }) {
-  const [allChars, setAllChars] = React.useState(
+  const [allChars, setAllChars] = React.useState<Character[]>(
     props.allCharData
       .map((char) => {
         return {
           ...char,
           isOwned: true,
-          state: "Default",
+          state: State.Default,
           teamPosition: -1,
         };
       })
@@ -24,15 +24,55 @@ export default function Container(props: {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
       })
   );
-
-  console.log(allChars);
-
-  function setOwned(newOwned: Character[]) {
+  
+  function updateOwned(newOwned: Character[]) {
     setAllChars(
       newOwned.sort((a, b) => {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
       })
     );
+  }
+
+  function setState(state: State, chars: number[]) {
+    const newChars: Character[] = allChars.map((char) => {
+      if (chars.includes(char.char_id)) {
+        return {
+          ...char,
+          state: state,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  function togglePosition(position: number, char_id: number) {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.char_id === char_id) {
+        return {
+          ...char,
+          position: char.teamPosition === position ? -1 : position,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  function resetState() {
+    const newChars: Character[] = allChars.map((char) => {
+      return {
+        ...char,
+        state: State.Default,
+      };
+    });
+
+    setAllChars(newChars);
+
   }
 
   const [showOptions, setShowOptions] = React.useState(false);
@@ -49,12 +89,15 @@ export default function Container(props: {
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
           toggleOptions={toggleOptions}
-          setOwned={setOwned}
+          setOwned={updateOwned}
         />
       )}
       <div className="wrapper">
         <div className="header">
           <div className="header-info">Genshin Abyss Randomizer</div>
+          <button className="reset-picks" onClick={() => resetState()}>
+            <div className="show-options-text">Reset Bans/Locks</div>
+          </button>
           <button className="show-options" onClick={() => toggleOptions()}>
             <div className="show-options-text">Edit Character List</div>
             <img
@@ -68,6 +111,8 @@ export default function Container(props: {
           allChars={allChars}
           elementData={props.elementData}
           weaponTypeData={props.weaponTypeData}
+          setState={setState}
+          togglePosition={togglePosition}
         />
       </div>
     </div>

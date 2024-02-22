@@ -8,7 +8,7 @@ export type Character = {
   region: string;
   profile_img: string;
   isOwned: boolean;
-  state: string;
+  state: State;
   teamPosition: number;
 };
 
@@ -17,3 +17,10 @@ export type FilterType = {
   name: string;
   img: string;
 };
+
+export enum State {
+  Lock = 2,
+  Default = 1,
+  Ban = 0,
+  Pick = -1,
+}
