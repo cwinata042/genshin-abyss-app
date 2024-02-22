@@ -426,3 +426,25 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.characters {
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  grid-column: 1 / 9;
+  max-height: 100vh;
+  min-height: 0;
+  background-color: rgba(255, 251, 240, 0.1);
+}
+
+.random-character-list {
+  padding: 10px 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 133px);
+  grid-template-rows: repeat(auto-fit, 179px);
+
+  overflow-y: scroll;
+
+  justify-content: center;
+  gap: 10px;
+
+  grid-row: 1 / 12;
+}

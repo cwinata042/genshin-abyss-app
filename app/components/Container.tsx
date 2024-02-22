@@ -25,8 +25,6 @@ export default function Container(props: {
       })
   );
 
-  console.log(allChars);
-
   function setOwned(newOwned: Character[]) {
     setAllChars(
       newOwned.sort((a, b) => {
