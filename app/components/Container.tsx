@@ -24,7 +24,7 @@ export default function Container(props: {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
       })
   );
-
+  
   function updateOwned(newOwned: Character[]) {
     setAllChars(
       newOwned.sort((a, b) => {
@@ -72,6 +72,7 @@ export default function Container(props: {
     });
 
     setAllChars(newChars);
+
   }
 
   const [showOptions, setShowOptions] = React.useState(false);
