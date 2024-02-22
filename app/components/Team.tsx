@@ -18,7 +18,7 @@ export default function Team(props: {
 
   return (
     <div className="teams">
-      <div className={getStyles(1)} onClick={() => props.setSelectedTeam(1)}>
+      <div className={getStyles(0)} onClick={() => props.setSelectedTeam(0)}>
         <p className="team-name">First Half</p>
         <CharacterList
           ownedCharacters={props.selectedChars[0]}
@@ -27,7 +27,7 @@ export default function Team(props: {
           renderBans={true}
         />
       </div>
-      <div className={getStyles(2)} onClick={() => props.setSelectedTeam(2)}>
+      <div className={getStyles(1)} onClick={() => props.setSelectedTeam(1)}>
         <p className="team-name">Second Half</p>
         <CharacterList
           ownedCharacters={props.selectedChars[1]}

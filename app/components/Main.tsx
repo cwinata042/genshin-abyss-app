@@ -9,24 +9,26 @@ export default function Main(props: {
   elementData: FilterType[];
   weaponTypeData: FilterType[];
   setState: Function;
+  togglePosition: Function;
 }) {
-  const [selectedTeam, setSelectedTeam] = React.useState(1);
+  const [selectedTeam, setSelectedTeam] = React.useState(0);
+
+  const defaultChar: Character = {
+    char_id: -1,
+    name: "--",
+    gender: "None",
+    rarity: -1,
+    element: "None",
+    weapon: "None",
+    region: "None",
+    profile_img: "/img/Default_Icon.svg",
+    isOwned: true,
+    state: State.Default,
+    teamPosition: 0,
+  };
 
   const [selectedChars, setSelectedChars] = React.useState(() => {
     let defaultArr: Character[][] = [[], []];
-    let defaultChar: Character = {
-      char_id: -1,
-      name: "--",
-      gender: "None",
-      rarity: -1,
-      element: "None",
-      weapon: "None",
-      region: "None",
-      profile_img: "/img/Default_Icon.svg",
-      isOwned: true,
-      state: State.Default,
-      teamPosition: 0,
-    };
 
     for (let x = 0; x < 2; x++) {
       for (let y = 0; y < 4; y++) {
@@ -49,6 +51,34 @@ export default function Main(props: {
     const newChar: Character = props.allChars.filter((char) => {
       return char.char_id === char_id;
     })[0];
+
+    let newSelected: Character[][] = selectedChars;
+    const foundSelected: boolean =
+      selectedChars[selectedTeam].filter((char) => {
+        return char.char_id === char_id;
+      }).length === 1;
+
+    let index: number;
+
+    // Do not continue if character is banned or locked
+    if (
+      newChar.state !== State.Default ||
+      selectedChars[selectedTeam][3].char_id !== -1
+    ) {
+      return;
+    } else if (!foundSelected) {
+      index = selectedChars[selectedTeam].findIndex((char) => {
+        return char.char_id === -1;
+      });
+    } else {
+      index = selectedChars[selectedTeam].findIndex((char) => {
+        return char.char_id === char_id;
+      });
+    }
+
+    newSelected[selectedTeam][index] = newChar;
+    props.togglePosition(index, char_id);
+    setSelectedChars(newSelected);
   }
 
   return (
