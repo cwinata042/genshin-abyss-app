@@ -8,7 +8,7 @@ const CharacterCard = (props: {
 }) => {
   function getRarityStyle() {
     let styles = "";
-    if (props.characterInfo.rarity) {
+    if (props.characterInfo.rarity !== -1) {
       styles += props.characterInfo.rarity === 5 ? "five-star" : "four-star";
     } else {
       styles += "default";
@@ -28,15 +28,13 @@ const CharacterCard = (props: {
       className={getCardStyle()}
       onClick={() => props.handleToggle(props.characterInfo.char_id)}
     >
-      <div className="card">
-        <div className={`img-holder ${getRarityStyle()}`}>
-          <img
-            className="character-img"
-            src={props.characterInfo.profile_img}
-            alt={`${props.characterInfo.name}'s profile image.`}
-          />
-          <div className="character-name">{props.characterInfo.name}</div>
-        </div>
+      <div className={`img-holder ${getRarityStyle()}`}>
+        <img
+          className="character-img"
+          src={props.characterInfo.profile_img}
+          alt={`${props.characterInfo.name}'s profile image.`}
+        />
+        <div className="character-name">{props.characterInfo.name}</div>
       </div>
     </button>
   );

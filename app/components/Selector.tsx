@@ -21,8 +21,10 @@ export default function Selector(props: {
     teamPosition: 0,
   };
 
-  const [randomChars, setRandomChars] = React.useState<Number[]>([]);
   const [numChars, setNumChars] = React.useState("8");
+  const [randomChars, setRandomChars] = React.useState<Number[]>(
+    Array(Number(numChars)).fill(-1)
+  );
 
   // REPLACE WITH TOGGLE FUNCTION FROM MAIN
   function handleToggle() {}
@@ -57,15 +59,25 @@ export default function Selector(props: {
     setRandomChars(newRanChars);
   }
 
+  function clearRandomize() {
+    const newList = Array(Number(numChars)).fill(-1);
+    setRandomChars(newList);
+  }
+
   // Creates Character List with random chars array
   const ranCharCards = randomChars.map((num, i) => {
-    const ranChar = props.ownedCharacters.filter((char) => {
-      return char.char_id === randomChars[i];
-    });
+    let ranChar;
+    if (randomChars[0] !== -1) {
+      ranChar = props.ownedCharacters.filter((char) => {
+        return char.char_id === randomChars[i];
+      })[0];
+    } else {
+      ranChar = defaultChar;
+    }
 
     return (
       <CharacterCard
-        characterInfo={ranChar[0]}
+        characterInfo={ranChar}
         handleToggle={handleToggle}
         renderBans={true}
         key={v4()}
@@ -75,20 +87,29 @@ export default function Selector(props: {
 
   return (
     <div className="selector">
-      <button className="randomize-button" onClick={handleRandomize}>
-        Randomize!
-      </button>
-      <label>
-        Number of Characters:
-        <input
-          className="number-input"
-          type="number"
-          min="1"
-          max="20"
-          value={numChars}
-          onInput={(e) => setNumChars((e.target as HTMLTextAreaElement).value)}
-        ></input>
-      </label>
+      <div className="selector-options">
+        <label className="number-input-label">
+          Number of Characters:
+          <input
+            className="number-input"
+            type="number"
+            min="1"
+            max="20"
+            value={numChars}
+            onInput={(e) =>
+              setNumChars((e.target as HTMLTextAreaElement).value)
+            }
+          ></input>
+        </label>
+        <div className="selector-buttons">
+          <button className="randomize-button" onClick={handleRandomize}>
+            Randomize
+          </button>
+          <button className="clear-button" onClick={clearRandomize}>
+            Clear
+          </button>
+        </div>
+      </div>
       <div className="random-character-list">{ranCharCards}</div>
     </div>
   );
