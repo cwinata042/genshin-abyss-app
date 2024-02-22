@@ -30,6 +30,9 @@
   --green: #9ce67b;
   --dark-green: #7ecf58;
   --darker-green: #5da53b;
+  --gray: #b6b6b6;
+  --dark-gray: #8f8f8f;
+  --darker-gray: #6e6e6e;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -382,6 +385,13 @@ body {
   gap: 15px;
 }
 
+.selector-confirm {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
 .number-input {
   color: black;
   margin-left: 10px;
@@ -398,7 +408,6 @@ body {
   border-radius: 0.5rem;
   padding: 0px 8px 0px 8px;
   height: 2.125rem;
-  width: 8rem;
 }
 
 .randomize-button:hover {
@@ -449,6 +458,62 @@ body {
   border-radius: 0.5rem;
   padding: 0px 8px 0px 8px;
   height: 2.125rem;
+}
+
+.ban-button {
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+  font-size: 1.4rem;
+}
+
+.ban-button:hover {
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.ban-button:active {
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.lock-button {
+  border: var(--gray);
+  color: var(--gray);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+  font-size: 1.4rem;
+}
+
+.lock-button:hover {
+  border: var(--dark-gray);
+  color: var(--dark-gray);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
+}
+
+.lock-button:active {
+  border: var(--darker-gray);
+  color: var(--darker-gray);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 8px 24px 8px 24px;
 }
 
 .random-character-list {

@@ -64,6 +64,8 @@ export default function Selector(props: {
     setRandomChars(newList);
   }
 
+  function handleConfirm(type: String) {}
+
   // Creates Character List with random chars array
   const ranCharCards = randomChars.map((num, i) => {
     let ranChar;
@@ -111,6 +113,14 @@ export default function Selector(props: {
         </div>
       </div>
       <div className="random-character-list">{ranCharCards}</div>
+      <div className="selector-confirm">
+        <button className="ban-button" onClick={() => handleConfirm("Ban")}>
+          Ban
+        </button>
+        <button className="lock-button" onClick={() => handleConfirm("Lock")}>
+          Lock
+        </button>
+      </div>
     </div>
   );
 }
