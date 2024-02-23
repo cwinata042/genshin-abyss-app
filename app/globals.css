@@ -39,6 +39,9 @@
   --gray25: #b6b6b625;
   --gray40: #b6b6b640;
   --gray50: #b6b6b650;
+  --gray75: #b6b6b675;
+  --gray85: #b6b6b685;
+  --gray: #b6b6b6;
   --dark-gray: #6d6d6d;
   --first-half: #cdfd64;
   --second-half: #469de3;
@@ -623,6 +626,32 @@ body {
   height: var(--character-img-height-s);
 }
 
+.team-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 15 / 16;
+  gap: 15px;
+}
+
+.reset-teams {
+  padding: 0px 15px 0px 15px;
+  color: var(--gray75);
+  border-radius: 15px;
+  font-size: 1rem;
+  height: 2rem;
+}
+
+.reset-teams:hover {
+  background-color: var(--gray25);
+  color: gray;
+}
+
+.reset-teams:active {
+  background-color: var(--gray40);
+  color: var(--gray);
+}
+
 .teams {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
@@ -656,42 +685,25 @@ body {
 }
 
 .confirm-teams {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-row: 15 / 16;
   border: var(--green);
   border-style: solid;
-  padding: 0px 15px 0px 15px;
+  padding: 0px 25px 0px 25px;
   color: var(--green);
   border-radius: 15px;
   font-size: 1.4rem;
+  height: 4rem;
 }
 
 .confirm-teams:hover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-row: 15 / 16;
   border: var(--dark-green);
   border-style: solid;
-  padding: 0px 15px 0px 15px;
   color: var(--dark-green);
-  border-radius: 15px;
-  font-size: 1.4rem;
 }
 
 .confirm-teams:active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-row: 15 / 16;
   border: var(--darker-green);
   border-style: solid;
-  padding: 0px 15px 0px 15px;
   color: var(--darker-green);
-  border-radius: 15px;
-  font-size: 1.4rem;
 }
 
 .team-name {
