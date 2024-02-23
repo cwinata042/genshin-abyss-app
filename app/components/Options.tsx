@@ -1,5 +1,5 @@
 import React from "react";
-import { Character, FilterType } from "./types";
+import { Character, FilterType, State } from "./types";
 import Characters from "./Characters";
 
 export default function Options(props: {
@@ -25,6 +25,9 @@ export default function Options(props: {
         return {
           ...character,
           isOwned: !character.isOwned,
+          state: State.Default,
+          currentTeam: -1,
+          teamPosition: -1,
         };
       } else {
         return character;
@@ -47,6 +50,9 @@ export default function Options(props: {
         return {
           ...character,
           isOwned: true,
+          state: State.Default,
+          currentTeam: -1,
+          teamPosition: -1,
         };
       });
 
@@ -56,6 +62,9 @@ export default function Options(props: {
         return {
           ...character,
           isOwned: false,
+          state: State.Default,
+          currentTeam: -1,
+          teamPosition: -1,
         };
       });
 
