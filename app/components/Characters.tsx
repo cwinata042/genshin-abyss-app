@@ -56,6 +56,8 @@ export default function Characters(props: {
         currFilters={currFilters}
         handleToggle={props.handleToggle}
         renderBans={props.renderBans}
+        renderSelect={true}
+        currentTeam={-1}
       />
       <Filters
         elementData={props.elementData}

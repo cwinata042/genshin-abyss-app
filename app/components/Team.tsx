@@ -25,6 +25,8 @@ export default function Team(props: {
           currFilters={emptyFilters}
           handleToggle={props.handleToggle}
           renderBans={true}
+          renderSelect={false}
+          currentTeam={0}
         />
       </div>
       <div className={getStyles(1)} onClick={() => props.setSelectedTeam(1)}>
@@ -34,6 +36,8 @@ export default function Team(props: {
           currFilters={emptyFilters}
           handleToggle={props.handleToggle}
           renderBans={true}
+          renderSelect={false}
+          currentTeam={1}
         />
       </div>
     </div>

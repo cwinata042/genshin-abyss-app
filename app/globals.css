@@ -40,6 +40,8 @@
   --gray40: #b6b6b640;
   --gray50: #b6b6b650;
   --dark-gray: #6d6d6d;
+  --first-half: #cdfd64;
+  --second-half: #469de3;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -117,7 +119,7 @@ body {
   justify-content: center;
 }
 
-.reset-picks {
+.reset-bans {
   margin-left: auto;
   border: var(--red);
   color: var(--red);
@@ -127,7 +129,7 @@ body {
   padding: 0px 8px 0px 8px;
 }
 
-.reset-picks:hover {
+.reset-bans:hover {
   margin-left: auto;
   border: var(--dark-red);
   color: var(--dark-red);
@@ -137,8 +139,38 @@ body {
   padding: 0px 8px 0px 8px;
 }
 
-.reset-picks:active {
+.reset-bans:active {
   margin-left: auto;
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks {
+  margin-left: 20px;
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:hover {
+  margin-left: 20px;
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:active {
+  margin-left: 20px;
   border: var(--darker-red);
   color: var(--darker-red);
   border-style: solid;
@@ -395,6 +427,7 @@ body {
 /** TEAM BUILDER **/
 .team-builder {
   display: grid;
+  justify-items: center;
   grid-template-rows: repeat(16, 1fr);
   grid-column: 9 / 13;
   max-height: 100vh;
@@ -404,10 +437,11 @@ body {
 }
 
 .selector {
-  grid-row: 1 / 7;
+  grid-row: 1 / 8;
 
   display: grid;
   grid-template-rows: repeat(6, 1fr);
+  width: 100%;
 }
 
 .selector-options {
@@ -592,11 +626,12 @@ body {
 .teams {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
-  grid-row: 8 / 17;
+  grid-row: 9 / 15;
   padding: 0px 17px 0px 17px;
   gap: 20px;
   overflow: hidden;
   align-items: center;
+  width: 100%;
 }
 
 .teams .character-list {
@@ -618,6 +653,45 @@ body {
 
 .selected-team:hover {
   background-color: #a1b6d050;
+}
+
+.confirm-teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 15 / 16;
+  border: var(--green);
+  border-style: solid;
+  padding: 0px 15px 0px 15px;
+  color: var(--green);
+  border-radius: 15px;
+  font-size: 1.4rem;
+}
+
+.confirm-teams:hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 15 / 16;
+  border: var(--dark-green);
+  border-style: solid;
+  padding: 0px 15px 0px 15px;
+  color: var(--dark-green);
+  border-radius: 15px;
+  font-size: 1.4rem;
+}
+
+.confirm-teams:active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row: 15 / 16;
+  border: var(--darker-green);
+  border-style: solid;
+  padding: 0px 15px 0px 15px;
+  color: var(--darker-green);
+  border-radius: 15px;
+  font-size: 1.4rem;
 }
 
 .team-name {
@@ -655,10 +729,6 @@ body {
   opacity: 0.5;
 }
 
-.ban {
-  opacity: 0.5;
-}
-
 .lock {
   display: flex;
   position: relative;
@@ -677,8 +747,57 @@ body {
   position: relative;
   width: var(--character-card-width);
   height: var(--character-card-height);
-  background-color: var(--darkest-red);
+  background-image: url(../public/icons/Icon_Ban.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  background-color: #98121220;
+  opacity: 0.8;
+}
+
+.use {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: var(--character-card-height);
+  background-color: black;
   opacity: 0.5;
+}
+
+.pick-one {
+  display: flex;
+  position: absolute;
+  width: var(--character-card-width);
+  height: 10px;
+  background-color: var(--first-half);
+}
+
+.pick-two {
+  display: flex;
+  position: absolute;
+  width: var(--character-card-width);
+  height: 10px;
+  background-color: var(--second-half);
+}
+
+.selected-team-0 {
+  color: black;
+  position: absolute;
+  align-self: last baseline;
+  width: 20px;
+  padding: 0px 5px 0px 5px;
+  background-color: var(--first-half);
+  border-radius: 5px;
+}
+
+.selected-team-1 {
+  color: black;
+  position: absolute;
+  align-self: last baseline;
+  width: 20px;
+  padding: 0px 5px 0px 5px;
+  background-color: var(--second-half);
+  border-radius: 5px;
 }
 
 .img-holder {
