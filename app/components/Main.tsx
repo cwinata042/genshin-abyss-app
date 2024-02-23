@@ -12,6 +12,7 @@ export default function Main(props: {
   togglePosition: Function;
   lockCharPositions: Function;
   confirmTeams: Function;
+  resetState: Function;
 }) {
   // Keeps track of the currently selected team
   const [selectedTeam, setSelectedTeam] = React.useState(0);
@@ -171,7 +172,9 @@ export default function Main(props: {
           ownedCharacters={props.allChars}
           setState={props.setState}
           setLockedChars={setLockedChars}
+          handleToggle={toggleSelectedChars}
         />
+
         <Team
           selectedChars={selectedChars}
           selectedTeam={selectedTeam}
@@ -179,12 +182,21 @@ export default function Main(props: {
           handleToggle={toggleSelectedChars}
         />
         {selectedCharsCount !== 0 && (
-          <button
-            className="confirm-teams"
-            onClick={() => props.confirmTeams()}
-          >
-            Confirm Teams
-          </button>
+          <div className="team-options">
+            <button
+              className="confirm-teams"
+              onClick={() => props.confirmTeams()}
+            >
+              Confirm Teams
+            </button>
+
+            <button
+              className="reset-teams"
+              onClick={() => props.resetState(State.Pick)}
+            >
+              Reset Selected Teams
+            </button>
+          </div>
         )}
       </div>
     </div>

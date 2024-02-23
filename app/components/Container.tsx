@@ -25,7 +25,7 @@ export default function Container(props: {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
       })
   );
-  
+
   // Updates owned characters to newOwned, sorting alphabetically by name
   function updateOwned(newOwned: Character[]) {
     setAllChars(
@@ -53,11 +53,11 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  // Changes any characters with State.Pick to
+  // Changes any characters with State.Pick or State.Lock to
   // state = State.Use, teamPosition = -1, currTeam = -1
   function confirmTeams() {
     const newChars: Character[] = allChars.map((char) => {
-      if (char.state === State.Pick) {
+      if (char.state === State.Pick || char.state === State.Lock) {
         return {
           ...char,
           state: State.Use,
@@ -92,11 +92,7 @@ export default function Container(props: {
   }
 
   // Locks all characters and adds them to the set positions and teams
-  function lockCharPositions(
-    positions: number[],
-    teams: number[],
-    char_ids: number[]
-  ) {
+  function lockChars(positions: number[], teams: number[], char_ids: number[]) {
     const newChars: Character[] = allChars.map((char) => {
       if (char.state === State.Lock) {
         return {
@@ -135,10 +131,10 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  // Sets all characters with State.Use to State.Default
-  function resetUsed() {
+  // Sets all characters with oldState to State.Default
+  function resetState(oldState: State) {
     const newChars: Character[] = allChars.map((char) => {
-      if (char.state === State.Use) {
+      if (char.state === oldState) {
         return {
           ...char,
           state: State.Default,
@@ -151,7 +147,6 @@ export default function Container(props: {
     });
 
     setAllChars(newChars);
-
   }
 
   // Handles whether the character list options should be rendered
@@ -178,7 +173,7 @@ export default function Container(props: {
           <button className="reset-bans" onClick={() => resetBansLocks()}>
             <div className="show-options-text">Reset Bans/Locks</div>
           </button>
-          <button className="reset-picks" onClick={() => resetUsed()}>
+          <button className="reset-picks" onClick={() => resetState(State.Use)}>
             <div className="show-options-text">Reset Used Characters</div>
           </button>
           <button className="show-options" onClick={() => toggleOptions()}>
@@ -196,8 +191,9 @@ export default function Container(props: {
           weaponTypeData={props.weaponTypeData}
           setState={setState}
           togglePosition={togglePosition}
-          lockCharPositions={lockCharPositions}
+          lockCharPositions={lockChars}
           confirmTeams={confirmTeams}
+          resetState={resetState}
         />
       </div>
     </div>
