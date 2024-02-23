@@ -10,6 +10,7 @@ export type Character = {
   isOwned: boolean;
   state: State;
   teamPosition: number;
+  currentTeam: number;
 };
 
 export type FilterType = {
@@ -20,7 +21,8 @@ export type FilterType = {
 
 export enum State {
   Lock = 2,
-  Default = 1,
-  Ban = 0,
-  Pick = -1,
+  Pick = 1,
+  Default = 0,
+  Ban = -1,
+  Use = -2,
 }

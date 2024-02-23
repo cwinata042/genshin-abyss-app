@@ -18,13 +18,15 @@ export default function Container(props: {
           isOwned: true,
           state: State.Default,
           teamPosition: -1,
+          currentTeam: -1,
         };
       })
       .sort((a, b) => {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
       })
   );
-  
+
+  // Updates owned characters to newOwned, sorting alphabetically by name
   function updateOwned(newOwned: Character[]) {
     setAllChars(
       newOwned.sort((a, b) => {
@@ -33,12 +35,15 @@ export default function Container(props: {
     );
   }
 
+  // Sets the state of multiple characters with ids in chars to state
   function setState(state: State, chars: number[]) {
     const newChars: Character[] = allChars.map((char) => {
       if (chars.includes(char.char_id)) {
         return {
           ...char,
           state: state,
+          teamPosition: -1,
+          currentTeam: -1,
         };
       } else {
         return char;
@@ -48,12 +53,35 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  function togglePosition(position: number, char_id: number) {
+  // Changes any characters with State.Pick or State.Lock to
+  // state = State.Use, teamPosition = -1, currTeam = -1
+  function confirmTeams() {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.state === State.Pick || char.state === State.Lock) {
+        return {
+          ...char,
+          state: State.Use,
+          teamPosition: -1,
+          currentTeam: -1,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  // Toggles the character's position and team
+  // Either removes or adds them
+  function togglePosition(position: number, team: number, char_id: number) {
     const newChars: Character[] = allChars.map((char) => {
       if (char.char_id === char_id) {
         return {
           ...char,
-          position: char.teamPosition === position ? -1 : position,
+          teamPosition: char.teamPosition === position ? -1 : position,
+          currentTeam: char.currentTeam === team ? -1 : team,
+          state: char.teamPosition === position ? State.Default : State.Pick,
         };
       } else {
         return char;
@@ -63,18 +91,65 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  function resetState() {
+  // Locks all characters and adds them to the set positions and teams
+  function lockChars(positions: number[], teams: number[], char_ids: number[]) {
     const newChars: Character[] = allChars.map((char) => {
-      return {
-        ...char,
-        state: State.Default,
-      };
+      if (char.state === State.Lock) {
+        return {
+          ...char,
+          state: State.Default,
+        };
+      }
+      if (char_ids.includes(char.char_id)) {
+        return {
+          ...char,
+          state: State.Lock,
+          teamPosition: positions[char_ids.indexOf(char.char_id)],
+          currentTeam: teams[char_ids.indexOf(char.char_id)],
+        };
+      } else {
+        return char;
+      }
     });
 
     setAllChars(newChars);
-
   }
 
+  // Sets all characters with State.Ban or State.Lock to State.Default
+  function resetBansLocks() {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.state === State.Ban || char.state === State.Lock) {
+        return {
+          ...char,
+          state: State.Default,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  // Sets all characters with oldState to State.Default
+  function resetState(oldState: State) {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.state === oldState) {
+        return {
+          ...char,
+          state: State.Default,
+          teamPosition: -1,
+          currentTeam: -1,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  // Handles whether the character list options should be rendered
   const [showOptions, setShowOptions] = React.useState(false);
 
   function toggleOptions() {
@@ -95,8 +170,11 @@ export default function Container(props: {
       <div className="wrapper">
         <div className="header">
           <div className="header-info">Genshin Abyss Randomizer</div>
-          <button className="reset-picks" onClick={() => resetState()}>
+          <button className="reset-bans" onClick={() => resetBansLocks()}>
             <div className="show-options-text">Reset Bans/Locks</div>
+          </button>
+          <button className="reset-picks" onClick={() => resetState(State.Use)}>
+            <div className="show-options-text">Reset Used Characters</div>
           </button>
           <button className="show-options" onClick={() => toggleOptions()}>
             <div className="show-options-text">Edit Character List</div>
@@ -113,6 +191,9 @@ export default function Container(props: {
           weaponTypeData={props.weaponTypeData}
           setState={setState}
           togglePosition={togglePosition}
+          lockCharPositions={lockChars}
+          confirmTeams={confirmTeams}
+          resetState={resetState}
         />
       </div>
     </div>
