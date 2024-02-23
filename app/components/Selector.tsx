@@ -7,6 +7,7 @@ export default function Selector(props: {
   selectedChars: Character[][];
   ownedCharacters: Character[];
   setState: Function;
+  setLockedChars: Function;
 }) {
   let defaultChar: Character = {
     char_id: -1,
@@ -31,7 +32,7 @@ export default function Selector(props: {
     return char.isOwned && char.state === State.Default;
   }).length;
 
-  // REPLACE WITH TOGGLE FUNCTION FROM MAIN
+  // Empty as Character Cards should not be toggleable
   function handleToggle() {}
 
   function handleRandomize() {
@@ -49,7 +50,7 @@ export default function Selector(props: {
         return char.char_id === newRan;
       });
 
-      // If character already selected or is not owned or is banned/selected
+      // If character already randomized or is not owned or is banned/locked
       while (
         newRanChars.includes(newRan) ||
         !newRanChar[0].isOwned ||
@@ -75,7 +76,13 @@ export default function Selector(props: {
   // IF BAN: REMOVE
   // IF SELECT: ADD
   function handleConfirm(type: State) {
-    props.setState(type, randomChars);
+    // If State.Select, set selectedChars to randomChars
+    // If State.Ban, remove randomChars from selectedChars
+    if (type === State.Lock) {
+      props.setLockedChars(randomChars);
+    } else if (type === State.Ban) {
+      props.setState(type, randomChars);
+    }
 
     clearRandomize();
   }

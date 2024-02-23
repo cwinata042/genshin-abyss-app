@@ -53,7 +53,29 @@ export default function Container(props: {
       if (char.char_id === char_id) {
         return {
           ...char,
-          position: char.teamPosition === position ? -1 : position,
+          teamPosition: char.teamPosition === position ? -1 : position,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  function lockCharPositions(positions: number[], char_ids: number[]) {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.state === State.Lock) {
+        return {
+          ...char,
+          state: State.Default,
+        };
+      }
+      if (char_ids.includes(char.char_id)) {
+        return {
+          ...char,
+          state: State.Lock,
+          teamPosition: positions[char_ids.indexOf(char.char_id)],
         };
       } else {
         return char;
@@ -112,6 +134,7 @@ export default function Container(props: {
           weaponTypeData={props.weaponTypeData}
           setState={setState}
           togglePosition={togglePosition}
+          lockCharPositions={lockCharPositions}
         />
       </div>
     </div>
