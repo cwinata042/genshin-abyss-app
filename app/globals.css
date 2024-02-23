@@ -685,7 +685,7 @@ body {
 
 .pick-one {
   display: flex;
-  position: relative;
+  position: absolute;
   width: var(--character-card-width);
   height: 10px;
   background-color: var(--first-half);
@@ -693,7 +693,7 @@ body {
 
 .pick-two {
   display: flex;
-  position: relative;
+  position: absolute;
   width: var(--character-card-width);
   height: 10px;
   background-color: var(--second-half);
@@ -701,20 +701,20 @@ body {
 
 .selected-team-0 {
   color: black;
-  position: relative;
-  margin-left: auto;
+  position: absolute;
+  align-self: last baseline;
+  width: 20px;
   padding: 0px 5px 0px 5px;
-  bottom: 8px;
   background-color: var(--first-half);
   border-radius: 5px;
 }
 
 .selected-team-1 {
   color: black;
-  position: relative;
-  margin-left: auto;
+  position: absolute;
+  align-self: last baseline;
+  width: 20px;
   padding: 0px 5px 0px 5px;
-  bottom: 8px;
   background-color: var(--second-half);
   border-radius: 5px;
 }

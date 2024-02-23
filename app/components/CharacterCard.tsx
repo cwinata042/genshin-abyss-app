@@ -36,16 +36,19 @@ const CharacterCard = (props: {
         styles += " ban";
       } else if (props.characterInfo.state === State.Lock) {
         styles += " lock";
-      } else if (
-        props.characterInfo.state === State.Pick &&
-        props.renderSelect
-      ) {
-        if (props.characterInfo.currentTeam === 0) {
-          styles += " pick-one";
-        } else {
-          styles += " pick-two";
-        }
       }
+    }
+
+    return styles;
+  }
+
+  function getTeamStyle() {
+    let styles = "pick-";
+
+    if (props.characterInfo.currentTeam === 0) {
+      styles += "one";
+    } else {
+      styles += "two";
     }
 
     return styles;
@@ -73,6 +76,7 @@ const CharacterCard = (props: {
       {props.characterInfo.state !== State.Default && (
         <div className={getBanStyle()}></div>
       )}
+      {isPick && <div className={getTeamStyle()}></div>}
       {isPick && (
         <div className={`selected-team-${props.characterInfo.currentTeam}`}>
           {props.characterInfo.teamPosition + 1}
