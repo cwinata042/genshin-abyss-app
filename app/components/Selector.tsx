@@ -73,9 +73,7 @@ export default function Selector(props: {
     setRandomChars(newList);
   }
 
-  // FIX TO HANDLE TEAM
-  // IF BAN: REMOVE
-  // IF SELECT: ADD
+  // FIX IF BAN: REMOVE
   function handleConfirm(type: State) {
     // If State.Select, set selectedChars to randomChars
     // If State.Ban, remove randomChars from selectedChars
@@ -118,6 +116,8 @@ export default function Selector(props: {
     );
   });
 
+  const currSelected = randomChars.filter((char_id) => char_id !== -1).length;
+
   return (
     <div className="selector">
       <div className="selector-options">
@@ -147,17 +147,22 @@ export default function Selector(props: {
         </div>
       </div>
       <div className="random-character-list">{ranCharCards}</div>
-      <div className="selector-confirm">
-        <button className="ban-button" onClick={() => handleConfirm(State.Ban)}>
-          Ban
-        </button>
-        <button
-          className="lock-button"
-          onClick={() => handleConfirm(State.Lock)}
-        >
-          Lock
-        </button>
-      </div>
+      {currSelected !== 0 && (
+        <div className="selector-confirm">
+          <button
+            className="ban-button"
+            onClick={() => handleConfirm(State.Ban)}
+          >
+            Ban
+          </button>
+          <button
+            className="lock-button"
+            onClick={() => handleConfirm(State.Lock)}
+          >
+            Lock
+          </button>
+        </div>
+      )}
     </div>
   );
 }

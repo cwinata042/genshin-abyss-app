@@ -42,6 +42,9 @@ export default function Main(props: {
   }
 
   const [selectedChars, setSelectedChars] = React.useState(defaultArr);
+  const selectedCharsId = selectedChars.flat().map((char) => {
+    return char.char_id;
+  });
 
   const sortedOwned = [...props.allChars]
     .sort((a, b) => {
@@ -111,6 +114,7 @@ export default function Main(props: {
       char_id === -1 ||
       newChar.state === State.Ban ||
       newChar.state === State.Lock ||
+      newChar.state === State.Use ||
       foundOther
     ) {
       return;
@@ -150,6 +154,11 @@ export default function Main(props: {
     setSelectedChars(newSelected);
   }
 
+  function confirmTeams() {
+    props.setState(State.Use, selectedCharsId);
+    setSelectedChars(defaultArr);
+  }
+
   return (
     <div className="main">
       <Characters
@@ -172,6 +181,9 @@ export default function Main(props: {
           setSelectedTeam={setSelectedTeam}
           handleToggle={toggleSelectedChars}
         />
+        <button className="confirm-teams" onClick={confirmTeams}>
+          Confirm Teams
+        </button>
       </div>
     </div>
   );

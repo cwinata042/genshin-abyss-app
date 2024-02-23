@@ -36,6 +36,8 @@ const CharacterCard = (props: {
         styles += " ban";
       } else if (props.characterInfo.state === State.Lock) {
         styles += " lock";
+      } else if (props.characterInfo.state === State.Use) {
+        styles += " use";
       }
     }
 
