@@ -37,10 +37,19 @@ export default function Container(props: {
   function setState(state: State, chars: number[]) {
     const newChars: Character[] = allChars.map((char) => {
       if (chars.includes(char.char_id)) {
-        return {
-          ...char,
-          state: state,
-        };
+        if (state === State.Use) {
+          return {
+            ...char,
+            state: state,
+            teamPosition: -1,
+            currentTeam: -1,
+          };
+        } else {
+          return {
+            ...char,
+            state: state,
+          };
+        }
       } else {
         return char;
       }
@@ -65,8 +74,6 @@ export default function Container(props: {
 
     setAllChars(newChars);
   }
-
-  console.log(allChars);
 
   function lockCharPositions(
     positions: number[],
@@ -95,12 +102,33 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  function resetState() {
+  function resetBansLocks() {
     const newChars: Character[] = allChars.map((char) => {
-      return {
-        ...char,
-        state: State.Default,
-      };
+      if (char.state === State.Ban || char.state === State.Lock) {
+        return {
+          ...char,
+          state: State.Default,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  function resetUsed() {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.state === State.Use) {
+        return {
+          ...char,
+          state: State.Default,
+          teamPosition: -1,
+          currentTeam: -1,
+        };
+      } else {
+        return char;
+      }
     });
 
     setAllChars(newChars);
@@ -126,8 +154,11 @@ export default function Container(props: {
       <div className="wrapper">
         <div className="header">
           <div className="header-info">Genshin Abyss Randomizer</div>
-          <button className="reset-picks" onClick={() => resetState()}>
+          <button className="reset-bans" onClick={() => resetBansLocks()}>
             <div className="show-options-text">Reset Bans/Locks</div>
+          </button>
+          <button className="reset-picks" onClick={() => resetUsed()}>
+            <div className="show-options-text">Reset Used Characters</div>
           </button>
           <button className="show-options" onClick={() => toggleOptions()}>
             <div className="show-options-text">Edit Character List</div>

@@ -119,7 +119,7 @@ body {
   justify-content: center;
 }
 
-.reset-picks {
+.reset-bans {
   margin-left: auto;
   border: var(--red);
   color: var(--red);
@@ -129,7 +129,7 @@ body {
   padding: 0px 8px 0px 8px;
 }
 
-.reset-picks:hover {
+.reset-bans:hover {
   margin-left: auto;
   border: var(--dark-red);
   color: var(--dark-red);
@@ -139,8 +139,38 @@ body {
   padding: 0px 8px 0px 8px;
 }
 
-.reset-picks:active {
+.reset-bans:active {
   margin-left: auto;
+  border: var(--darker-red);
+  color: var(--darker-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks {
+  margin-left: 20px;
+  border: var(--red);
+  color: var(--red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:hover {
+  margin-left: 20px;
+  border: var(--dark-red);
+  color: var(--dark-red);
+  border-style: solid;
+  border-width: 0.13rem;
+  border-radius: 0.5rem;
+  padding: 0px 8px 0px 8px;
+}
+
+.reset-picks:active {
+  margin-left: 20px;
   border: var(--darker-red);
   color: var(--darker-red);
   border-style: solid;
