@@ -8,6 +8,7 @@ export default function Selector(props: {
   ownedCharacters: Character[];
   setState: Function;
   setLockedChars: Function;
+  handleToggle: Function;
 }) {
   let defaultChar: Character = {
     char_id: -1,
@@ -32,9 +33,6 @@ export default function Selector(props: {
   const totalOwned = props.ownedCharacters.filter((char) => {
     return char.isOwned && char.state === State.Default;
   }).length;
-
-  // Empty as Character Cards should not be toggleable
-  function handleToggle() {}
 
   function handleRandomize() {
     if (Number(numChars) > totalOwned) {
@@ -108,7 +106,7 @@ export default function Selector(props: {
     return (
       <CharacterCard
         characterInfo={ranChar}
-        handleToggle={handleToggle}
+        handleToggle={props.handleToggle}
         renderBans={true}
         renderSelect={false}
         key={v4()}

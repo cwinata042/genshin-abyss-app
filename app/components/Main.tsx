@@ -171,6 +171,7 @@ export default function Main(props: {
           ownedCharacters={props.allChars}
           setState={props.setState}
           setLockedChars={setLockedChars}
+          handleToggle={toggleSelectedChars}
         />
         <Team
           selectedChars={selectedChars}
