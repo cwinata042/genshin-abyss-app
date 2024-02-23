@@ -8,6 +8,8 @@ export default function CharacterList(props: {
   currFilters: string[][];
   handleToggle: Function;
   renderBans: boolean;
+  renderSelect: boolean;
+  currentTeam: number;
 }) {
   let filteredChars = props.ownedCharacters;
   // Finds all characters with a matching element filter
@@ -52,6 +54,7 @@ export default function CharacterList(props: {
         characterInfo={character}
         handleToggle={props.handleToggle}
         renderBans={props.renderBans}
+        renderSelect={props.renderSelect}
       />
     );
   });

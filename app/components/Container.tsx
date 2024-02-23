@@ -18,6 +18,7 @@ export default function Container(props: {
           isOwned: true,
           state: State.Default,
           teamPosition: -1,
+          currentTeam: -1,
         };
       })
       .sort((a, b) => {
@@ -48,12 +49,14 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  function togglePosition(position: number, char_id: number) {
+  function togglePosition(position: number, team: number, char_id: number) {
     const newChars: Character[] = allChars.map((char) => {
       if (char.char_id === char_id) {
         return {
           ...char,
           teamPosition: char.teamPosition === position ? -1 : position,
+          currentTeam: char.currentTeam === team ? -1 : team,
+          state: char.teamPosition === position ? State.Default : State.Pick,
         };
       } else {
         return char;
@@ -63,7 +66,13 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
-  function lockCharPositions(positions: number[], char_ids: number[]) {
+  console.log(allChars);
+
+  function lockCharPositions(
+    positions: number[],
+    teams: number[],
+    char_ids: number[]
+  ) {
     const newChars: Character[] = allChars.map((char) => {
       if (char.state === State.Lock) {
         return {
@@ -76,6 +85,7 @@ export default function Container(props: {
           ...char,
           state: State.Lock,
           teamPosition: positions[char_ids.indexOf(char.char_id)],
+          currentTeam: teams[char_ids.indexOf(char.char_id)],
         };
       } else {
         return char;

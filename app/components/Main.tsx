@@ -26,6 +26,7 @@ export default function Main(props: {
     isOwned: true,
     state: State.Default,
     teamPosition: 0,
+    currentTeam: -1,
   };
 
   const defaultArr: Character[][] = [[], []];
@@ -35,20 +36,29 @@ export default function Main(props: {
       defaultArr[x][y] = {
         ...defaultChar,
         teamPosition: y,
+        currentTeam: x,
       };
     }
   }
 
   const [selectedChars, setSelectedChars] = React.useState(defaultArr);
 
-  const sortedOwned = [...props.allChars].sort((a, b) => {
-    return b.state - a.state;
-  });
+  const sortedOwned = [...props.allChars]
+    .sort((a, b) => {
+      return a.teamPosition - b.teamPosition;
+    })
+    .sort((a, b) => {
+      return a.currentTeam - b.currentTeam;
+    })
+    .sort((a, b) => {
+      return b.state - a.state;
+    });
 
   function setLockedChars(lockedChars: number[]) {
     // Reset selectedChars list to all defaults
     let newSelectedChars = defaultArr;
     let indices: number[] = [];
+    let teams: number[] = [];
 
     for (let i = 0; i < lockedChars.length; i++) {
       // For first half of lockedChars list, add to 1st team
@@ -64,10 +74,10 @@ export default function Main(props: {
 
       // Add position to indeces
       indices.push(index);
+      teams.push(team);
     }
-    props.lockCharPositions(indices, lockedChars);
+    props.lockCharPositions(indices, teams, lockedChars);
 
-    console.log(newSelectedChars);
     setSelectedChars(newSelectedChars);
   }
 
@@ -97,7 +107,12 @@ export default function Main(props: {
     // Do not continue if character is empty
     // Or is banned or locked
     // Or is in the other team
-    if (char_id === -1 || newChar.state !== State.Default || foundOther) {
+    if (
+      char_id === -1 ||
+      newChar.state === State.Ban ||
+      newChar.state === State.Lock ||
+      foundOther
+    ) {
       return;
     } else if (!foundSelected) {
       // If not in selected team, find empty slot
@@ -105,9 +120,18 @@ export default function Main(props: {
         return char.char_id === -1;
       });
 
+      console.log(index);
+
       // Add the new character if there are empty spots
       if (index !== -1) {
-        newSelected[selectedTeam][index] = { ...newChar, teamPosition: index };
+        newSelected[selectedTeam][index] = {
+          ...newChar,
+          teamPosition: index,
+          currentTeam: selectedTeam,
+          state: State.Pick,
+        };
+      } else {
+        return;
       }
     } else {
       // If in selected team, find spot
@@ -120,7 +144,7 @@ export default function Main(props: {
     }
 
     // Toggles the character's position in the team
-    props.togglePosition(index, char_id);
+    props.togglePosition(index, selectedTeam, char_id);
 
     // Sets the selected characters to the new Character[][]
     setSelectedChars(newSelected);

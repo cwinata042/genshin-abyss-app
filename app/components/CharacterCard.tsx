@@ -5,6 +5,7 @@ const CharacterCard = (props: {
   characterInfo: Character;
   handleToggle: Function;
   renderBans: boolean;
+  renderSelect: boolean;
 }) => {
   function getRarityStyle() {
     let styles = "";
@@ -35,11 +36,26 @@ const CharacterCard = (props: {
         styles += " ban";
       } else if (props.characterInfo.state === State.Lock) {
         styles += " lock";
+      } else if (
+        props.characterInfo.state === State.Pick &&
+        props.renderSelect
+      ) {
+        if (props.characterInfo.currentTeam === 0) {
+          styles += " pick-one";
+        } else {
+          styles += " pick-two";
+        }
       }
     }
 
     return styles;
   }
+
+  const isPick =
+    (props.characterInfo.state === State.Pick ||
+      props.characterInfo.state === State.Lock) &&
+    props.renderSelect &&
+    props.renderBans;
 
   return (
     <button
@@ -56,6 +72,11 @@ const CharacterCard = (props: {
       </div>
       {props.characterInfo.state !== State.Default && (
         <div className={getBanStyle()}></div>
+      )}
+      {isPick && (
+        <div className={`selected-team-${props.characterInfo.currentTeam}`}>
+          {props.characterInfo.teamPosition + 1}
+        </div>
       )}
     </button>
   );

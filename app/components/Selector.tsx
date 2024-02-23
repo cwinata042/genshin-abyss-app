@@ -21,6 +21,7 @@ export default function Selector(props: {
     isOwned: true,
     state: State.Default,
     teamPosition: 0,
+    currentTeam: -1,
   };
 
   const [numChars, setNumChars] = React.useState("8");
@@ -111,6 +112,7 @@ export default function Selector(props: {
         characterInfo={ranChar}
         handleToggle={handleToggle}
         renderBans={true}
+        renderSelect={false}
         key={v4()}
       />
     );

@@ -40,6 +40,8 @@
   --gray40: #b6b6b640;
   --gray50: #b6b6b650;
   --dark-gray: #6d6d6d;
+  --first-half: #cdfd64;
+  --second-half: #469de3;
   --character-card-width: 133px;
   --character-card-height: 179px;
   --character-img-height: 151px;
@@ -679,6 +681,42 @@ body {
   height: var(--character-card-height);
   background-color: var(--darkest-red);
   opacity: 0.5;
+}
+
+.pick-one {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: 10px;
+  background-color: var(--first-half);
+}
+
+.pick-two {
+  display: flex;
+  position: relative;
+  width: var(--character-card-width);
+  height: 10px;
+  background-color: var(--second-half);
+}
+
+.selected-team-0 {
+  color: black;
+  position: relative;
+  margin-left: auto;
+  padding: 0px 5px 0px 5px;
+  bottom: 8px;
+  background-color: var(--first-half);
+  border-radius: 5px;
+}
+
+.selected-team-1 {
+  color: black;
+  position: relative;
+  margin-left: auto;
+  padding: 0px 5px 0px 5px;
+  bottom: 8px;
+  background-color: var(--second-half);
+  border-radius: 5px;
 }
 
 .img-holder {
