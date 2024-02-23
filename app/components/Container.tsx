@@ -39,19 +39,12 @@ export default function Container(props: {
   function setState(state: State, chars: number[]) {
     const newChars: Character[] = allChars.map((char) => {
       if (chars.includes(char.char_id)) {
-        if (state === State.Use) {
-          return {
-            ...char,
-            state: state,
-            teamPosition: -1,
-            currentTeam: -1,
-          };
-        } else {
-          return {
-            ...char,
-            state: state,
-          };
-        }
+        return {
+          ...char,
+          state: state,
+          teamPosition: -1,
+          currentTeam: -1,
+        };
       } else {
         return char;
       }

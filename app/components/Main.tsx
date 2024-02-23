@@ -35,6 +35,11 @@ export default function Main(props: {
   // Replaces the old selectedChars state
   const selectedChars: Character[][] = getCurrTeams();
 
+  // Gets number of selected non-default characters
+  const selectedCharsCount = selectedChars
+    .flat()
+    .filter((char) => char.char_id !== -1).length;
+
   // Returns the current teams based on allChars in a Character[][]
   function getCurrTeams() {
     let currSelected: Character[][] = [[], []];
@@ -173,9 +178,14 @@ export default function Main(props: {
           setSelectedTeam={setSelectedTeam}
           handleToggle={toggleSelectedChars}
         />
-        <button className="confirm-teams" onClick={() => props.confirmTeams()}>
-          Confirm Teams
-        </button>
+        {selectedCharsCount !== 0 && (
+          <button
+            className="confirm-teams"
+            onClick={() => props.confirmTeams()}
+          >
+            Confirm Teams
+          </button>
+        )}
       </div>
     </div>
   );
