@@ -25,7 +25,7 @@ export default function Container(props: {
         return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
       })
   );
-
+  
   // Updates owned characters to newOwned, sorting alphabetically by name
   function updateOwned(newOwned: Character[]) {
     setAllChars(
@@ -158,6 +158,7 @@ export default function Container(props: {
     });
 
     setAllChars(newChars);
+
   }
 
   // Handles whether the character list options should be rendered
