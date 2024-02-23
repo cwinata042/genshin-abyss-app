@@ -13,6 +13,7 @@ export default function Main(props: {
   lockCharPositions: Function;
   confirmTeams: Function;
 }) {
+  // Keeps track of the currently selected team
   const [selectedTeam, setSelectedTeam] = React.useState(0);
 
   const defaultChar: Character = {
@@ -32,8 +33,7 @@ export default function Main(props: {
 
   // Creates the team based on the allChars characters' positions and current team
   // Replaces the old selectedChars state
-  const newSelectedTeams: Character[][] = getCurrTeams();
-  console.log(newSelectedTeams);
+  const selectedChars: Character[][] = getCurrTeams();
 
   // Returns the current teams based on allChars in a Character[][]
   function getCurrTeams() {
@@ -59,23 +59,9 @@ export default function Main(props: {
     return currSelected;
   }
 
-  const defaultArr: Character[][] = [[], []];
-
-  for (let x = 0; x < 2; x++) {
-    for (let y = 0; y < 4; y++) {
-      defaultArr[x][y] = {
-        ...defaultChar,
-        teamPosition: y,
-        currentTeam: x,
-      };
-    }
-  }
-
-  const [selectedChars, setSelectedChars] = React.useState(defaultArr);
-  const selectedCharsId = selectedChars.flat().map((char) => {
-    return char.char_id;
-  });
-
+  // Sorts the characters by the following:
+  // Locked === Picked > Default > Banned > Used
+  // Team Number > Team Position
   const sortedOwned = [...props.allChars]
     .sort((a, b) => {
       return a.teamPosition - b.teamPosition;
@@ -122,11 +108,11 @@ export default function Main(props: {
     // Determines if character is in selected or other team
     const otherTeam: number = selectedTeam === 0 ? 1 : 0;
     const foundSelected: boolean =
-      newSelectedTeams[selectedTeam].filter((char) => {
+      selectedChars[selectedTeam].filter((char) => {
         return char.char_id === char_id;
       }).length === 1;
     const foundOther: boolean =
-      newSelectedTeams[otherTeam].filter((char) => {
+      selectedChars[otherTeam].filter((char) => {
         return char.char_id === char_id;
       }).length === 1;
 
@@ -146,7 +132,7 @@ export default function Main(props: {
       return;
     } else if (!foundSelected) {
       // If not in selected team, find empty slot
-      index = newSelectedTeams[selectedTeam].findIndex((char) => {
+      index = selectedChars[selectedTeam].findIndex((char) => {
         return char.char_id === -1;
       });
 
@@ -156,7 +142,7 @@ export default function Main(props: {
       }
     } else {
       // If in selected team, find current spot
-      index = newSelectedTeams[selectedTeam].findIndex((char) => {
+      index = selectedChars[selectedTeam].findIndex((char) => {
         return char.char_id === char_id;
       });
     }
@@ -176,13 +162,13 @@ export default function Main(props: {
       />
       <div className="team-builder">
         <Selector
-          selectedChars={newSelectedTeams}
+          selectedChars={selectedChars}
           ownedCharacters={props.allChars}
           setState={props.setState}
           setLockedChars={setLockedChars}
         />
         <Team
-          selectedChars={newSelectedTeams}
+          selectedChars={selectedChars}
           selectedTeam={selectedTeam}
           setSelectedTeam={setSelectedTeam}
           handleToggle={toggleSelectedChars}
