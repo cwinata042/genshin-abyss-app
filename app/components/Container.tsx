@@ -26,6 +26,7 @@ export default function Container(props: {
       })
   );
 
+  // Updates owned characters to newOwned, sorting alphabetically by name
   function updateOwned(newOwned: Character[]) {
     setAllChars(
       newOwned.sort((a, b) => {
@@ -34,6 +35,7 @@ export default function Container(props: {
     );
   }
 
+  // Sets the state of multiple characters with ids in chars to state
   function setState(state: State, chars: number[]) {
     const newChars: Character[] = allChars.map((char) => {
       if (chars.includes(char.char_id)) {
@@ -58,6 +60,27 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  // Changes any characters with State.Pick to
+  // state = State.Use, teamPosition = -1, currTeam = -1
+  function confirmTeams() {
+    const newChars: Character[] = allChars.map((char) => {
+      if (char.state === State.Pick) {
+        return {
+          ...char,
+          state: State.Use,
+          teamPosition: -1,
+          currentTeam: -1,
+        };
+      } else {
+        return char;
+      }
+    });
+
+    setAllChars(newChars);
+  }
+
+  // Toggles the character's position and team
+  // Either removes or adds them
   function togglePosition(position: number, team: number, char_id: number) {
     const newChars: Character[] = allChars.map((char) => {
       if (char.char_id === char_id) {
@@ -75,6 +98,7 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  // Locks all characters and adds them to the set positions and teams
   function lockCharPositions(
     positions: number[],
     teams: number[],
@@ -102,6 +126,7 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  // Sets all characters with State.Ban or State.Lock to State.Default
   function resetBansLocks() {
     const newChars: Character[] = allChars.map((char) => {
       if (char.state === State.Ban || char.state === State.Lock) {
@@ -117,6 +142,7 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  // Sets all characters with State.Use to State.Default
   function resetUsed() {
     const newChars: Character[] = allChars.map((char) => {
       if (char.state === State.Use) {
@@ -134,6 +160,7 @@ export default function Container(props: {
     setAllChars(newChars);
   }
 
+  // Handles whether the character list options should be rendered
   const [showOptions, setShowOptions] = React.useState(false);
 
   function toggleOptions() {
@@ -176,6 +203,7 @@ export default function Container(props: {
           setState={setState}
           togglePosition={togglePosition}
           lockCharPositions={lockCharPositions}
+          confirmTeams={confirmTeams}
         />
       </div>
     </div>

@@ -11,6 +11,7 @@ export default function Main(props: {
   setState: Function;
   togglePosition: Function;
   lockCharPositions: Function;
+  confirmTeams: Function;
 }) {
   const [selectedTeam, setSelectedTeam] = React.useState(0);
 
@@ -28,6 +29,35 @@ export default function Main(props: {
     teamPosition: 0,
     currentTeam: -1,
   };
+
+  // Creates the team based on the allChars characters' positions and current team
+  // Replaces the old selectedChars state
+  const newSelectedTeams: Character[][] = getCurrTeams();
+  console.log(newSelectedTeams);
+
+  // Returns the current teams based on allChars in a Character[][]
+  function getCurrTeams() {
+    let currSelected: Character[][] = [[], []];
+
+    for (let team = 0; team < 2; team++) {
+      for (let pos = 0; pos < 4; pos++) {
+        // Filter allChars for that team and pos
+        let posChar: Character[] = props.allChars.filter(
+          (char) => char.currentTeam === team && char.teamPosition === pos
+        );
+
+        // If filtered list has a character, add them
+        // Else add a default character
+        if (posChar.length !== 0) {
+          currSelected[team][pos] = posChar[0];
+        } else {
+          currSelected[team][pos] = defaultChar;
+        }
+      }
+    }
+
+    return currSelected;
+  }
 
   const defaultArr: Character[][] = [[], []];
 
@@ -54,12 +84,18 @@ export default function Main(props: {
       return a.currentTeam - b.currentTeam;
     })
     .sort((a, b) => {
-      return b.state - a.state;
+      if (
+        (a.state === State.Lock && b.state === State.Pick) ||
+        (a.state === State.Pick && b.state === State.Lock)
+      ) {
+        return 0;
+      } else {
+        return b.state - a.state;
+      }
     });
 
   function setLockedChars(lockedChars: number[]) {
-    // Reset selectedChars list to all defaults
-    let newSelectedChars = defaultArr;
+    // Initialize list of new team position and current team
     let indices: number[] = [];
     let teams: number[] = [];
 
@@ -68,47 +104,37 @@ export default function Main(props: {
       // For second half of lockedChars list, add to 2nd team
       let team = i < lockedChars.length / 2.0 ? 0 : 1;
       let index = team === 0 ? i : i - Math.ceil(lockedChars.length / 2);
-      const lockedChar: Character = props.allChars.filter((char) => {
-        return char.char_id === lockedChars[i];
-      })[0];
-
-      // Add character to selectedChars
-      newSelectedChars[team][index] = { ...lockedChar, state: State.Lock };
 
       // Add position to indeces
       indices.push(index);
       teams.push(team);
     }
     props.lockCharPositions(indices, teams, lockedChars);
-
-    setSelectedChars(newSelectedChars);
   }
 
+  // Attempts to toggle (add/remove) a character with char_id to the currently selected team
   function toggleSelectedChars(char_id: number) {
     // Finds the selected character
     const newChar: Character = props.allChars.filter((char) => {
       return char.char_id === char_id;
     })[0];
 
-    // Sets up new selected character array
-    let newSelected: Character[][] = selectedChars;
-
     // Determines if character is in selected or other team
     const otherTeam: number = selectedTeam === 0 ? 1 : 0;
     const foundSelected: boolean =
-      selectedChars[selectedTeam].filter((char) => {
+      newSelectedTeams[selectedTeam].filter((char) => {
         return char.char_id === char_id;
       }).length === 1;
     const foundOther: boolean =
-      selectedChars[otherTeam].filter((char) => {
+      newSelectedTeams[otherTeam].filter((char) => {
         return char.char_id === char_id;
       }).length === 1;
 
-    // Sets up new index
+    // Initializes new index of character
     let index: number;
 
-    // Do not continue if character is empty
-    // Or is banned or locked
+    // Break if character is empty default
+    // Or is banned or locked or already used
     // Or is in the other team
     if (
       char_id === -1 ||
@@ -120,43 +146,23 @@ export default function Main(props: {
       return;
     } else if (!foundSelected) {
       // If not in selected team, find empty slot
-      index = selectedChars[selectedTeam].findIndex((char) => {
+      index = newSelectedTeams[selectedTeam].findIndex((char) => {
         return char.char_id === -1;
       });
 
-      console.log(index);
-
-      // Add the new character if there are empty spots
-      if (index !== -1) {
-        newSelected[selectedTeam][index] = {
-          ...newChar,
-          teamPosition: index,
-          currentTeam: selectedTeam,
-          state: State.Pick,
-        };
-      } else {
+      // Break if there are no empty spots
+      if (index === -1) {
         return;
       }
     } else {
-      // If in selected team, find spot
-      index = selectedChars[selectedTeam].findIndex((char) => {
+      // If in selected team, find current spot
+      index = newSelectedTeams[selectedTeam].findIndex((char) => {
         return char.char_id === char_id;
       });
-
-      // Replace character with default character
-      newSelected[selectedTeam][index] = defaultChar;
     }
 
     // Toggles the character's position in the team
     props.togglePosition(index, selectedTeam, char_id);
-
-    // Sets the selected characters to the new Character[][]
-    setSelectedChars(newSelected);
-  }
-
-  function confirmTeams() {
-    props.setState(State.Use, selectedCharsId);
-    setSelectedChars(defaultArr);
   }
 
   return (
@@ -170,18 +176,18 @@ export default function Main(props: {
       />
       <div className="team-builder">
         <Selector
-          selectedChars={selectedChars}
+          selectedChars={newSelectedTeams}
           ownedCharacters={props.allChars}
           setState={props.setState}
           setLockedChars={setLockedChars}
         />
         <Team
-          selectedChars={selectedChars}
+          selectedChars={newSelectedTeams}
           selectedTeam={selectedTeam}
           setSelectedTeam={setSelectedTeam}
           handleToggle={toggleSelectedChars}
         />
-        <button className="confirm-teams" onClick={confirmTeams}>
+        <button className="confirm-teams" onClick={() => props.confirmTeams()}>
           Confirm Teams
         </button>
       </div>
